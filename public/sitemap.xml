@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://portfolio1-promsereyreaksas-projects.vercel.app/</loc>
+    <loc>https://promsereyreaksa.dev/</loc>
     <lastmod>2025-09-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://portfolio1-promsereyreaksas-projects.vercel.app/#about</loc>
+    <loc>https://promsereyreaksa.dev/about</loc>
     <lastmod>2025-09-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://portfolio1-promsereyreaksas-projects.vercel.app/#projects</loc>
+    <loc>https://promsereyreaksa.dev/projects</loc>
     <lastmod>2025-09-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://portfolio1-promsereyreaksas-projects.vercel.app/#visual-work</loc>
+    <loc>https://promsereyreaksa.dev/visual-work</loc>
     <lastmod>2025-09-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://portfolio1-promsereyreaksas-projects.vercel.app/#contact</loc>
+    <loc>https://promsereyreaksa.dev/contact</loc>
     <lastmod>2025-09-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://portfolio1-promsereyreaksas-projects.vercel.app/gallery.html</loc>
+    <loc>https://promsereyreaksa.dev/gallery.html</loc>
     <lastmod>2025-09-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

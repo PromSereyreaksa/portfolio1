@@ -11,14 +11,14 @@
     <meta name="keywords" content="Prom Sereyreaksa, Software Engineer, Creative Technologist, Graphic Designer, React Developer, UI/UX Designer, Portfolio, Cambodia, Web Development, Digital Art" />
     <meta name="author" content="Prom Sereyreaksa" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://portfolio1-promsereyreaksas-projects.vercel.app/" />
+    <link rel="canonical" href="https://promsereyreaksa.dev/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://portfolio1-promsereyreaksas-projects.vercel.app/" />
+    <meta property="og:url" content="https://promsereyreaksa.dev/" />
     <meta property="og:title" content="Prom Sereyreaksa - Creative Technologist & Software Engineer" />
     <meta property="og:description" content="Creative Technologist, Software Engineer & Graphic Designer from Cambodia. Specialized in React, UI/UX Design, and Digital Art. View my portfolio of innovative projects and creative work." />
-    <meta property="og:image" content="https://portfolio1-promsereyreaksas-projects.vercel.app/profile.jpg" />
+    <meta property="og:image" content="https://promsereyreaksa.dev/profile.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -28,30 +28,85 @@
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://portfolio1-promsereyreaksas-projects.vercel.app/" />
+    <meta property="twitter:url" content="https://promsereyreaksa.dev/" />
     <meta property="twitter:title" content="Prom Sereyreaksa - Creative Technologist & Software Engineer" />
     <meta property="twitter:description" content="Creative Technologist, Software Engineer & Graphic Designer from Cambodia. Specialized in React, UI/UX Design, and Digital Art." />
-    <meta property="twitter:image" content="https://portfolio1-promsereyreaksas-projects.vercel.app/profile.jpg" />
+    <meta property="twitter:image" content="https://promsereyreaksa.dev/profile.jpg" />
     <meta property="twitter:image:alt" content="Prom Sereyreaksa - Creative Technologist and Software Engineer" />
     
     <!-- Additional SEO -->
     <meta name="theme-color" content="#ffffff" />
     <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Prom Sereyreaksa" />
+    
+    <!-- Critical CSS - Inline for fastest render -->
+    <style>
+      /* Critical layout styles */
+      #root { min-height: 100vh; }
+      .animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out; }
+      .animate-fadeInUp-1 { animation: fadeInUp 0.8s ease-out 0.2s both; }
+      .animate-fadeInUp-2 { animation: fadeInUp 0.8s ease-out 0.4s both; }
+      .animate-fadeInUp-3 { animation: fadeInUp 0.8s ease-out 0.6s both; }
+      .animate-fadeInUp-4 { animation: fadeInUp 0.8s ease-out 0.8s both; }
+      .animate-fadeInUp-5 { animation: fadeInUp 0.8s ease-out 1.0s both; }
+      .animate-fadeInUp-6 { animation: fadeInUp 0.8s ease-out 1.2s both; }
+      
+      @keyframes fadeInLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      /* Critical font fallbacks */
+      body { 
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-display: swap;
+      }
+    </style>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/profile.jpg" />
     
     <!-- Performance Optimizations -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="preload" href="/profile.jpg" as="image" type="image/jpeg">
-    <link rel="preload" href="/profile-1.webp" as="image" type="image/webp">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical images only -->
+    <link rel="preload" href="/profile.jpg" as="image" type="image/jpeg">
+    <link rel="preload" href="/profile-1.webp" as="image" type="image/webp" media="(min-width: 768px)">
+    
+    <!-- Preload critical CSS -->
+    <link rel="modulepreload" href="/src/main.jsx">
+    
+    <!-- Early hints for critical resources -->
+    <link rel="prefetch" href="/Luminyx.webp">
+    <link rel="prefetch" href="/sitemap.xml">
+    <link rel="prefetch" href="/robots.txt">
+    
+    <!-- Fonts - Optimized loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Critical font families preloaded -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"></noscript>
+    
+    <!-- Secondary font loaded asynchronously -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"></noscript>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -60,23 +115,118 @@
       "@type": "Person",
       "name": "Prom Sereyreaksa",
       "alternateName": "Serey Reaksa Prom",
-      "jobTitle": "Creative Technologist",
-      "description": "Creative Technologist, Software Engineer & Graphic Designer",
-      "url": "https://portfolio1-promsereyreaksas-projects.vercel.app/",
-      "image": "https://portfolio1-promsereyreaksas-projects.vercel.app/profile.webp",
+      "jobTitle": ["Creative Technologist", "Software Engineer", "Graphic Designer"],
+      "description": "Creative Technologist, Software Engineer & Graphic Designer specializing in React development, UI/UX design, and digital art from Cambodia",
+      "url": "https://promsereyreaksa.dev/",
+      "image": "https://promsereyreaksa.dev/profile.jpg",
       "sameAs": [
         "https://github.com/PromSereyreaksa",
         "https://web.facebook.com/profile.php?id=61567582710788"
       ],
       "knowsAbout": [
         "Software Engineering",
-        "React Development",
+        "React Development", 
+        "JavaScript",
         "UI/UX Design",
         "Graphic Design",
         "Digital Art",
-        "Web Development"
+        "Web Development",
+        "Frontend Development"
       ],
-      "alumniOf": "Cambodia Academy of Digital Technology"
+      "alumniOf": {
+        "@type": "Organization",
+        "name": "Cambodia Academy of Digital Technology"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Luminyx",
+        "jobTitle": "Video Editor"
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Cambodia"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "Cambodia"
+      }
+    }
+    </script>
+    
+    <!-- Website Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Prom Sereyreaksa Portfolio",
+      "url": "https://promsereyreaksa.dev/",
+      "description": "Professional portfolio showcasing creative technology projects, software engineering work, and graphic design by Prom Sereyreaksa",
+      "author": {
+        "@type": "Person",
+        "name": "Prom Sereyreaksa"
+      },
+      "inLanguage": "en-US",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "WebPage",
+            "@id": "https://promsereyreaksa.dev/about",
+            "name": "About",
+            "description": "Learn about Prom Sereyreaksa's background in creative technology and software engineering"
+          },
+          {
+            "@type": "WebPage", 
+            "@id": "https://promsereyreaksa.dev/projects",
+            "name": "Projects",
+            "description": "Software engineering projects including React applications and web development"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://promsereyreaksa.dev/visual-work", 
+            "name": "Visual Work",
+            "description": "Graphic design portfolio and digital art creations"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://promsereyreaksa.dev/contact",
+            "name": "Contact", 
+            "description": "Get in touch for software engineering and creative technology projects"
+          }
+        ]
+      }
+    }
+    </script>
+    
+    <!-- Navigation Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "name": "Main Navigation",
+      "url": "https://promsereyreaksa.dev/",
+      "hasPart": [
+        {
+          "@type": "WebPage",
+          "name": "About",
+          "url": "https://promsereyreaksa.dev/about"
+        },
+        {
+          "@type": "WebPage", 
+          "name": "Projects",
+          "url": "https://promsereyreaksa.dev/projects"
+        },
+        {
+          "@type": "WebPage",
+          "name": "Visual Work", 
+          "url": "https://promsereyreaksa.dev/visual-work"
+        },
+        {
+          "@type": "WebPage",
+          "name": "Contact",
+          "url": "https://promsereyreaksa.dev/contact"
+        }
+      ]
     }
     </script>
   </head>

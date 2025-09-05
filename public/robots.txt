@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://portfolio1-promsereyreaksas-projects.vercel.app/sitemap.xml
+Sitemap: https://promsereyreaksa.dev/sitemap.xml
 
 # Allow all web crawlers to access all content
 Disallow: 

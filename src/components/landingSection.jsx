@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import ResponsiveImage from './ResponsiveImage';
 import ImageLoader from './ImageLoader';
 
 const LandingSection = memo(() => {
@@ -15,14 +16,14 @@ const LandingSection = memo(() => {
       
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         
-        {/* Avatar - SEO/Social media safe with smooth loading */}
+        {/* Avatar - Optimized responsive image with proper sizing */}
         <div className="flex justify-center md:justify-end animate-fadeInLeft">
-          <img
+          <ResponsiveImage
             src="/profile-1.webp"
             alt="Prom Sereyreaksa - Creative Technologist and Software Engineer"
-            className="w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] object-cover rounded-full shadow-2xl"
-            loading="eager"
-            decoding="async"
+            className="w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] rounded-full shadow-2xl"
+            sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 448px"
+            priority={true}
           />
         </div>
 
@@ -54,10 +55,12 @@ const LandingSection = memo(() => {
           <div className="space-y-1 animate-fadeInUp-6">
             <p className="text-sm font-light text-gray-500">Cambodia Academy of Digital Technology</p>
             <div className="flex items-center justify-center md:justify-start space-x-2">
-              <ImageLoader 
+              <ResponsiveImage 
                 src="/Luminyx.webp" 
                 alt="Luminyx Logo" 
-                className="w-5 h-5 rounded-full object-cover"
+                className="w-5 h-5 rounded-full flex-shrink-0"
+                sizes="20px"
+                priority={false}
               />
               <p className="text-sm font-light text-gray-500">Video Editor at Luminyx</p>
             </div>
