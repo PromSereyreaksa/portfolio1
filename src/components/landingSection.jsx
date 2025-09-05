@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import ResponsiveImage from './ResponsiveImage';
-import ImageLoader from './ImageLoader';
 
 const LandingSection = memo(() => {
   return (

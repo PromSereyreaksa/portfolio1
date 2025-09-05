@@ -1,4 +1,4 @@
-import { memo, useState, useRef, useEffect } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 const ResponsiveImage = memo(({ 
   src, 
