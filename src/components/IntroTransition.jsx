@@ -29,7 +29,7 @@ export default function IntroTransition() {
   return (
     <div 
       ref={sectionRef}
-      className="relative h-80 flex items-center justify-center bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden px-4"
+      className="relative h-80 flex items-center justify-center bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden px-4 my-16"
     >
       {/* Animated divider line */}
       <div 

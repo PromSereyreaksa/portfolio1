@@ -61,21 +61,40 @@ const AboutSection = memo(() => {
         {/* Current Work */}
         <ScrollAnimationWrapper animation="fadeInUp" delay={400}>
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-thin tracking-[0.2em] md:tracking-[0.3em] text-black mb-8 max-w-full">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-thin tracking-[0.2em] md:tracking-[0.3em] text-black mb-6 max-w-full">
               CURRENT WORK
             </h2>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <div className="bg-gray-50 p-8 rounded-lg">
-                <LazyImage src="/Luminyx.webp" alt="Luminyx Company Logo" className="w-16 h-16 mx-auto mb-4 object-cover rounded" />
-                <h3 className="font-light tracking-wide text-black mb-2">Video Editor</h3>
-                <p className="text-sm text-gray-600">at Luminyx</p>
+            <div className="w-24 h-px bg-black mx-auto mb-8"></div>
+            <p className="text-sm md:text-base font-light text-gray-600 max-w-2xl mx-auto leading-relaxed mb-12">
+              Currently engaged in creative and technical roles across different organizations
+            </p>
+            
+            {/* Work Grid - Clean layout with side-by-side mobile display */}
+            <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
+              <div className="group text-center">
+                <div className="relative mb-4 md:mb-6">
+                  <LazyImage 
+                    src="/Luminyx.webp" 
+                    alt="Luminyx Company Logo" 
+                    className="w-16 h-16 md:w-20 md:h-20 mx-auto object-cover rounded-lg group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+                <h3 className="text-sm md:text-lg font-light tracking-wide text-black mb-1 md:mb-2 group-hover:text-gray-700 transition-colors">Video Editor</h3>
+                <p className="text-xs md:text-sm text-gray-600">at Luminyx</p>
               </div>
-              <div className="bg-gray-50 p-8 rounded-lg">
-                <LazyImage src="/COPPSARY.webp" alt="COPPSARY Project Group Logo" className="w-16 h-16 mx-auto mb-4 object-cover rounded" />
-                <h3 className="font-light tracking-wide text-black mb-2">Founding Leader</h3>
-                <p className="text-sm text-gray-600">COPPSARY - Project Group</p>
-                <a href="https://web.facebook.com/profile.php?id=61567582710788" target="_blank" rel="noopener noreferrer" className="inline-flex items-center mt-2 text-xs text-blue-600 hover:text-blue-800">
-                  <ExternalLink size={12} className="mr-1" /> View Group
+              
+              <div className="group text-center">
+                <div className="relative mb-4 md:mb-6">
+                  <LazyImage 
+                    src="/COPPSARY.webp" 
+                    alt="COPPSARY Project Group Logo" 
+                    className="w-16 h-16 md:w-20 md:h-20 mx-auto object-cover rounded-lg group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+                <h3 className="text-sm md:text-lg font-light tracking-wide text-black mb-1 md:mb-2 group-hover:text-gray-700 transition-colors">Founding Leader</h3>
+                <p className="text-xs md:text-sm text-gray-600 mb-2">COPPSARY - Project Group</p>
+                <a href="https://web.facebook.com/profile.php?id=61567582710788" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs text-blue-600 hover:text-blue-800 group-hover:translate-y-1 transition-all duration-300">
+                  <ExternalLink size={10} className="mr-1" /> View Group
                 </a>
               </div>
             </div>

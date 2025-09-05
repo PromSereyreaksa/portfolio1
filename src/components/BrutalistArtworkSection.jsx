@@ -39,35 +39,40 @@ const BrutalistArtworkSection = memo(() => {
               animation="fadeInUp" 
               delay={400 + index * 100}
             >
-              <div className="group relative overflow-hidden bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-500">
+              <div className="group relative overflow-hidden bg-gray-50 rounded-lg hover:shadow-lg active:shadow-xl active:scale-[0.98] transition-all duration-300 cursor-pointer">
                 
                 {/* Artwork Image */}
                 <div className="relative overflow-hidden aspect-[4/5]">
                   <LazyImage 
                     src={artwork.src} 
                     alt={`${artwork.title} - ${artwork.category} Art by Prom Sereyreaksa`}
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-active:grayscale-0 group-hover:scale-105 group-active:scale-110 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 group-active:bg-black/20 transition-colors duration-300"></div>
                 </div>
 
                 {/* Artwork Info */}
                 <div className="p-3 sm:p-4 md:p-6">
                   <div className="flex items-center justify-between mb-1 sm:mb-2">
-                    <h3 className="text-sm sm:text-base md:text-lg font-light tracking-wide text-black group-hover:text-gray-700 transition-colors">
+                    <h3 className="text-sm sm:text-base md:text-lg font-light tracking-wide text-black group-hover:text-gray-700 group-active:text-gray-800 transition-colors">
                       {artwork.title}
                     </h3>
-                    <span className="text-xs font-mono tracking-wider text-gray-500">
+                    <span className="text-xs font-mono tracking-wider text-gray-500 group-active:text-gray-700 transition-colors">
                       {artwork.id.toString().padStart(2, '0')}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-600 tracking-wide">
+                  <p className="text-xs sm:text-sm text-gray-600 tracking-wide group-active:text-gray-700 transition-colors">
                     {artwork.category}
                   </p>
                 </div>
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 pointer-events-none"></div>
+                {/* Hover/Active Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 group-active:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
+                
+                {/* Mobile tap indicator */}
+                <div className="md:hidden absolute top-2 right-2 opacity-0 group-active:opacity-100 transition-opacity duration-200">
+                  <div className="w-2 h-2 bg-white rounded-full shadow-lg"></div>
+                </div>
               </div>
             </ScrollAnimationWrapper>
           ))}
@@ -78,7 +83,7 @@ const BrutalistArtworkSection = memo(() => {
           <div className="text-center mt-12">
             <a 
               href="/gallery.html"
-              className="inline-flex items-center space-x-2 px-8 py-3 border border-gray-300 text-gray-700 hover:border-black hover:text-black transition-colors duration-300"
+              className="inline-flex items-center space-x-2 px-8 py-3 border border-gray-300 text-gray-700 hover:border-black hover:text-black active:border-black active:text-black active:scale-95 transition-all duration-300"
             >
               <span className="text-sm tracking-wide">SEE ALL WORK</span>
             </a>

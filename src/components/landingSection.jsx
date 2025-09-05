@@ -3,7 +3,7 @@ import ResponsiveImage from './ResponsiveImage';
 
 const LandingSection = memo(() => {
   return (
-    <section className="relative flex items-center justify-center min-h-screen w-full bg-white px-8 md:px-16 lg:px-24 overflow-hidden">
+    <section className="relative flex items-center justify-center min-h-screen w-full bg-white px-8 md:px-16 lg:px-24 pt-20 md:pt-0 mb-12 overflow-hidden">
       {/* Fallback content for crawlers - always visible */}
       <noscript>
         <div className="max-w-7xl mx-auto text-center">
