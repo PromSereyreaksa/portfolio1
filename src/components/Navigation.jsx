@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);

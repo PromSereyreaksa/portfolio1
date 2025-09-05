@@ -1,15 +1,17 @@
+import { memo, useMemo } from 'react';
+import LazyImage from './LazyImage';
 import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
-const BrutalistArtworkSection = () => {
-  // All artwork pieces (1.jpg to 7.jpg)
-  const artworks = [
-    { id: 1, src: "/2.jpg", title: "CTA Design", category: "CONCEPT" },
-    { id: 2, src: "/3.jpg", title: "Jett <3", category: "CONCEPT" },
-    { id: 3, src: "/4.jpg", title: "Lucy and David", category: "CONCEPT" },
-    { id: 4, src: "/5.jpg", title: "ARCANE", category: "CONCEPT" },
-    { id: 5, src: "/6.jpg", title: "EMPIRE OF THE UNDYING", category: "CONCEPT" },
-    { id: 6, src: "/7.jpg", title: "Digital Design Competition", category: "CONCEPT" }
-  ];
+const BrutalistArtworkSection = memo(() => {
+  // All artwork pieces (webp versions for better performance)
+  const artworks = useMemo(() => [
+    { id: 1, src: "/2.webp", title: "CTA Design", category: "CONCEPT" },
+    { id: 2, src: "/3.webp", title: "Jett <3", category: "CONCEPT" },
+    { id: 3, src: "/4.webp", title: "Lucy and David", category: "CONCEPT" },
+    { id: 4, src: "/5.webp", title: "ARCANE", category: "CONCEPT" },
+    { id: 5, src: "/6.webp", title: "EMPIRE OF THE UNDYING", category: "CONCEPT" },
+    { id: 6, src: "/7.webp", title: "Digital Design Competition", category: "CONCEPT" }
+  ], []);
 
   return (
     <section className="py-24 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
@@ -41,9 +43,9 @@ const BrutalistArtworkSection = () => {
                 
                 {/* Artwork Image */}
                 <div className="relative overflow-hidden aspect-[4/5]">
-                  <img 
+                  <LazyImage 
                     src={artwork.src} 
-                    alt={artwork.title}
+                    alt={`${artwork.title} - ${artwork.category} Art by Prom Sereyreaksa`}
                     className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
@@ -85,6 +87,8 @@ const BrutalistArtworkSection = () => {
       </div>
     </section>
   );
-};
+});
+
+BrutalistArtworkSection.displayName = 'BrutalistArtworkSection';
 
 export default BrutalistArtworkSection;

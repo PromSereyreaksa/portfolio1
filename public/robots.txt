@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://portfolio1-promsereyreaksas-projects.vercel.app/sitemap.xml
+
+# Allow all web crawlers to access all content
+Disallow: 
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1

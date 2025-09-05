@@ -8,9 +8,11 @@ import {
     Server,
     Trophy
 } from 'lucide-react';
+import { memo } from 'react';
+import LazyImage from './LazyImage';
 import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
-export default function AboutSection() {
+const AboutSection = memo(() => {
   return (
     <section className="py-24 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -64,12 +66,12 @@ export default function AboutSection() {
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div className="bg-gray-50 p-8 rounded-lg">
-                <img src="/Luminyx.jpg" alt="Luminyx" className="w-16 h-16 mx-auto mb-4 object-cover rounded" />
+                <LazyImage src="/Luminyx.webp" alt="Luminyx Company Logo" className="w-16 h-16 mx-auto mb-4 object-cover rounded" />
                 <h3 className="font-light tracking-wide text-black mb-2">Video Editor</h3>
                 <p className="text-sm text-gray-600">at Luminyx</p>
               </div>
               <div className="bg-gray-50 p-8 rounded-lg">
-                <img src="/COPPSARY.jpg" alt="COPPSARY" className="w-16 h-16 mx-auto mb-4 object-cover rounded" />
+                <LazyImage src="/COPPSARY.webp" alt="COPPSARY Project Group Logo" className="w-16 h-16 mx-auto mb-4 object-cover rounded" />
                 <h3 className="font-light tracking-wide text-black mb-2">Founding Leader</h3>
                 <p className="text-sm text-gray-600">COPPSARY - Project Group</p>
                 <a href="https://web.facebook.com/profile.php?id=61567582710788" target="_blank" rel="noopener noreferrer" className="inline-flex items-center mt-2 text-xs text-blue-600 hover:text-blue-800">
@@ -134,6 +136,10 @@ export default function AboutSection() {
       </div>
     </section>
   );
-}
+});
+
+AboutSection.displayName = 'AboutSection';
+
+export default AboutSection;
 
 

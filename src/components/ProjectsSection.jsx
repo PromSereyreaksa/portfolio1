@@ -1,8 +1,9 @@
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
+import LazyImage from './LazyImage';
 import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
-export default function ProjectsSection() {
+const ProjectsSection = memo(() => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
@@ -47,15 +48,11 @@ export default function ProjectsSection() {
     setCurrentSlide(currentSlide === projects.length - 1 ? 0 : currentSlide + 1);
   };
 
-  const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? projects.length - 1 : currentSlide - 1);
-  };
-
-  const projects = [
+  const projects = useMemo(() => [
     {
       title: "Phsar Design",
       description: "A marketplace connecting talented digital artists, designers, and creative professionals. Bring your vision to life with world-class creative services.",
-      image: "/Phsardesign.jpg",
+      image: "/Phsardesign.webp",
       link: "https://phsardesign.vercel.app/",
       status: "Currently Working",
       tags: ["Startup", "Marketplace", "Creative Services", "React", "Express"],
@@ -64,7 +61,7 @@ export default function ProjectsSection() {
     {
       title: "Ideagen",
       description: "The ultimate tool for graphic designers seeking inspiration. Generate random design challenges, color palettes, and creative prompts to enhance your design skills and overcome creative blocks.",
-      image: "/Ideagen.jpg", 
+      image: "/Ideagen.webp", 
       link: "https://ideagen-eta.vercel.app/",
       status: "Live",
       tags: ["Design Tool", "Inspiration", "React", "Creative"]
@@ -72,7 +69,7 @@ export default function ProjectsSection() {
     {
       title: "Automata Visualizer",
       description: "An interactive tool for managing and visualizing finite state machines. Perfect for computer science students and professionals working with formal language theory.",
-      image: "/Automata.jpg",
+      image: "/Automata.webp",
       link: "https://automata-f6k9.onrender.com/", 
       status: "Live",
       tags: ["Education", "Visualization", "Computer Science", "React"]
@@ -80,12 +77,16 @@ export default function ProjectsSection() {
     {
       title: "Todone",
       description: "A productivity application designed to help users organize tasks, manage projects, and boost productivity with an intuitive and clean interface.",
-      image: "/Todone.jpg",
+      image: "/Todone.webp",
       link: "#",
       status: "In Development",
       tags: ["Productivity", "Task Management", "React", "UI/UX"]
     }
-  ];
+  ], []);
+
+  const prevSlide = () => {
+    setCurrentSlide(currentSlide === 0 ? projects.length - 1 : currentSlide - 1);
+  };
 
   return (
     <section className="py-24 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
@@ -113,9 +114,9 @@ export default function ProjectsSection() {
                 
                 {/* Project Image */}
                 <div className="relative overflow-hidden">
-                  <img 
+                  <LazyImage 
                     src={projects[0].image} 
-                    alt={projects[0].title}
+                    alt={`${projects[0].title} - Project Preview`}
                     className="w-full h-64 lg:h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4">
@@ -185,9 +186,9 @@ export default function ProjectsSection() {
                         
                         {/* Project Image */}
                         <div className="relative overflow-hidden">
-                          <img 
+                          <LazyImage 
                             src={project.image} 
-                            alt={project.title}
+                            alt={`${project.title} - Project Preview`}
                             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
@@ -287,9 +288,9 @@ export default function ProjectsSection() {
                     
                     {/* Project Image */}
                     <div className="relative overflow-hidden">
-                      <img 
+                      <LazyImage 
                         src={project.image} 
-                        alt={project.title}
+                        alt={`${project.title} - Project Preview`}
                         className="w-full h-32 sm:h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
@@ -356,4 +357,8 @@ export default function ProjectsSection() {
       </div>
     </section>
   );
-}
+});
+
+ProjectsSection.displayName = 'ProjectsSection';
+
+export default ProjectsSection;
