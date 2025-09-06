@@ -260,11 +260,17 @@ const ProjectsSection = memo(() => {
                   {projects.map((_, index) => (
                     <button
                       key={index}
-                      className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                        currentSlide === index ? 'bg-black' : 'bg-gray-300'
+                      className={`p-2 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 ${
+                        currentSlide === index ? 'bg-black/10' : 'bg-gray-100 hover:bg-gray-200'
                       }`}
                       onClick={() => setCurrentSlide(index)}
-                    />
+                      aria-label={`Go to project ${index + 1}`}
+                      aria-pressed={currentSlide === index}
+                    >
+                      <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                        currentSlide === index ? 'bg-black' : 'bg-gray-400'
+                      }`} />
+                    </button>
                   ))}
                 </div>
 

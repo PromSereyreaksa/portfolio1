@@ -1,8 +1,11 @@
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import LazyImage from './LazyImage';
 import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
 const BrutalistArtworkSection = memo(() => {
+  // State for managing clicked/active artworks on mobile
+  const [activeArtwork, setActiveArtwork] = useState(null);
+  
   // All artwork pieces (webp versions for better performance)
   const artworks = useMemo(() => [
     { id: 1, src: "/2.webp", title: "CTA Design", category: "CONCEPT" },
@@ -12,6 +15,11 @@ const BrutalistArtworkSection = memo(() => {
     { id: 5, src: "/6.webp", title: "EMPIRE OF THE UNDYING", category: "CONCEPT" },
     { id: 6, src: "/7.webp", title: "Digital Design Competition", category: "CONCEPT" }
   ], []);
+
+  // Handle mobile click/tap interactions
+  const handleArtworkClick = (artworkId) => {
+    setActiveArtwork(activeArtwork === artworkId ? null : artworkId);
+  };
 
   return (
     <section className="py-24 px-8 md:px-16 lg:px-24 bg-white overflow-hidden">
@@ -39,38 +47,68 @@ const BrutalistArtworkSection = memo(() => {
               animation="fadeInUp" 
               delay={400 + index * 100}
             >
-              <div className="group relative overflow-hidden bg-gray-50 rounded-lg hover:shadow-lg active:shadow-xl active:scale-[0.98] transition-all duration-300 cursor-pointer">
+              <div 
+                className="group relative overflow-hidden bg-gray-50 rounded-lg hover:shadow-lg active:shadow-xl active:scale-[0.98] transition-all duration-300 cursor-pointer"
+                onClick={() => handleArtworkClick(artwork.id)}
+              >
                 
                 {/* Artwork Image */}
                 <div className="relative overflow-hidden aspect-[4/5]">
                   <LazyImage 
                     src={artwork.src} 
                     alt={`${artwork.title} - ${artwork.category} Art by Prom Sereyreaksa`}
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-active:grayscale-0 group-hover:scale-105 group-active:scale-110 transition-all duration-700"
+                    className={`w-full h-full object-cover transition-all duration-700 ${
+                      // Desktop: use hover states, Mobile: use click states
+                      activeArtwork === artwork.id 
+                        ? 'md:filter md:grayscale md:group-hover:grayscale-0 grayscale-0 scale-105' 
+                        : 'filter grayscale group-hover:grayscale-0 group-hover:scale-105'
+                    }`}
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 group-active:bg-black/20 transition-colors duration-300"></div>
+                  <div className={`absolute inset-0 transition-colors duration-300 ${
+                    activeArtwork === artwork.id 
+                      ? 'md:bg-black/0 md:group-hover:bg-black/10 bg-black/10' 
+                      : 'bg-black/0 group-hover:bg-black/10'
+                  }`}></div>
                 </div>
 
                 {/* Artwork Info */}
                 <div className="p-3 sm:p-4 md:p-6">
                   <div className="flex items-center justify-between mb-1 sm:mb-2">
-                    <h3 className="text-sm sm:text-base md:text-lg font-light tracking-wide text-black group-hover:text-gray-700 group-active:text-gray-800 transition-colors">
+                    <h3 className={`text-sm sm:text-base md:text-lg font-light tracking-wide transition-colors ${
+                      activeArtwork === artwork.id 
+                        ? 'md:text-black md:group-hover:text-gray-700 text-gray-700' 
+                        : 'text-black group-hover:text-gray-700'
+                    }`}>
                       {artwork.title}
                     </h3>
-                    <span className="text-xs font-mono tracking-wider text-gray-500 group-active:text-gray-700 transition-colors">
+                    <span className={`text-xs font-mono tracking-wider transition-colors ${
+                      activeArtwork === artwork.id 
+                        ? 'md:text-gray-500 md:group-hover:text-gray-700 text-gray-700' 
+                        : 'text-gray-500 group-hover:text-gray-700'
+                    }`}>
                       {artwork.id.toString().padStart(2, '0')}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-600 tracking-wide group-active:text-gray-700 transition-colors">
+                  <p className={`text-xs sm:text-sm tracking-wide transition-colors ${
+                    activeArtwork === artwork.id 
+                      ? 'md:text-gray-600 md:group-hover:text-gray-700 text-gray-700' 
+                      : 'text-gray-600 group-hover:text-gray-700'
+                  }`}>
                     {artwork.category}
                   </p>
                 </div>
 
                 {/* Hover/Active Overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 group-active:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
+                <div className={`absolute inset-0 transition-colors duration-300 pointer-events-none ${
+                  activeArtwork === artwork.id 
+                    ? 'md:bg-black/0 md:group-hover:bg-black/5 bg-black/5' 
+                    : 'bg-black/0 group-hover:bg-black/5'
+                }`}></div>
                 
-                {/* Mobile tap indicator */}
-                <div className="md:hidden absolute top-2 right-2 opacity-0 group-active:opacity-100 transition-opacity duration-200">
+                {/* Mobile tap indicator - shows when active */}
+                <div className={`md:hidden absolute top-2 right-2 transition-opacity duration-200 ${
+                  activeArtwork === artwork.id ? 'opacity-100' : 'opacity-0'
+                }`}>
                   <div className="w-2 h-2 bg-white rounded-full shadow-lg"></div>
                 </div>
               </div>

@@ -74,7 +74,7 @@ const AboutSection = memo(() => {
               <div className="group text-center">
                 <div className="relative mb-4 md:mb-6">
                   <LazyImage 
-                    src="/Luminyx.webp" 
+                    src="/Luminyx-1.webp" 
                     alt="Luminyx Company Logo" 
                     className="w-16 h-16 md:w-20 md:h-20 mx-auto object-cover rounded-lg group-hover:scale-105 transition-transform duration-700" 
                   />
