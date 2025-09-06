@@ -4,6 +4,8 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Base URL for deployment (adjust based on your hosting)
+  base: '/',
   plugins: [
     react(), 
     tailwindcss()

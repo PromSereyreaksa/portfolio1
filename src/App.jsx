@@ -17,8 +17,17 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     // Log error in development, send to monitoring in production
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Error caught by boundary:', error, errorInfo);
+    console.error('Error caught by boundary:', error, errorInfo);
+    
+    // Also log to help debug deployment issues
+    if (typeof window !== 'undefined') {
+      console.error('Deployment Debug - Error Details:', {
+        message: error.message,
+        stack: error.stack,
+        componentStack: errorInfo.componentStack,
+        url: window.location.href,
+        userAgent: navigator.userAgent
+      });
     }
   }
 
@@ -57,6 +66,17 @@ const IntroTransition = lazy(() => import('./components/IntroTransition.jsx'))
 const ProjectsSection = lazy(() => import('./components/ProjectsSection.jsx'))
 
 function App() {
+  // Debug deployment issues
+  useEffect(() => {
+    console.log('App mounted successfully');
+    console.log('Environment:', {
+      mode: import.meta.env.MODE,
+      base: import.meta.env.BASE_URL,
+      prod: import.meta.env.PROD,
+      dev: import.meta.env.DEV
+    });
+  }, []);
+
   // Handle URL changes and scroll to sections for SEO and UX
   useEffect(() => {
     const handleHashChange = () => {
