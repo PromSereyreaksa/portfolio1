@@ -66,7 +66,7 @@ export default function IntroTransition() {
             transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s'
           }}
         >
-          EXPLORE
+          Explore
         </h3>
 
         {/* Expanding underline */}
@@ -87,7 +87,7 @@ export default function IntroTransition() {
             transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s'
           }}
         >
-          THE JOURNEY CONTINUES
+          The journey continues..
         </p>
       </div>
 

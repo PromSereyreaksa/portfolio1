@@ -9,7 +9,7 @@ const LandingSection = memo(() => {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-6xl font-thin tracking-wider text-black mb-4">SEREY REAKSA PROM</h1>
           <p className="text-xl font-light text-gray-800 mb-2">Creative Technologist</p>
-          <p className="text-base text-gray-600">Software Engineer & Graphic Designer</p>
+          <p className="text-base text-gray-600">Software Developer</p>
         </div>
       </noscript>
       
@@ -41,13 +41,24 @@ const LandingSection = memo(() => {
               Creative Technologist
             </p>
             <p className="text-sm md:text-base font-light text-gray-600">
-              Software Engineer & Graphic Designer
+              Software Developer
             </p>
           </div>
 
           <div className="space-y-1 animate-fadeInUp-6">
+            
             <p className="text-sm font-light text-gray-500">Cambodia Academy of Digital Technology</p>
             <div className="flex items-center justify-center md:justify-start space-x-2">
+              <img 
+                src="/AUREA.webp" 
+                alt="AUREA" 
+                className="w-5 h-5 rounded-full flex-shrink-0"
+                width="20"
+                height="20"
+                loading="lazy"
+                decoding="async"
+              />
+              <p className="text-sm font-light text-gray-500">Co Founder of AUREA</p>
               <img 
                 src="/Luminyx-1.webp" 
                 alt="Luminyx Logo" 
@@ -57,7 +68,7 @@ const LandingSection = memo(() => {
                 loading="lazy"
                 decoding="async"
               />
-              <p className="text-sm font-light text-gray-500">Video Editor at Luminyx</p>
+              <p className="text-sm font-light text-gray-500">Video Editor at LUMINYX</p>
             </div>
           </div>
         </div>

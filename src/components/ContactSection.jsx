@@ -58,7 +58,7 @@ export default function ContactSection() {
             
             <div className="mt-8 pt-8 border-t border-gray-200">
               <p className="text-xs text-gray-500 font-light tracking-wide">
-                © 2025 Prom Sereyreaksa. All rights reserved.
+                © 2026 Prom Sereyreaksa. All rights reserved.
               </p>
             </div>
           </div>
