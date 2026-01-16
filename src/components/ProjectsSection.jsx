@@ -178,7 +178,7 @@ export const ScrollStack = ({
 
   return (
     <div ref={containerRef} className={`relative w-full ${className}`}>
-      <div className=" px-4 md:px-8 lg:px-20">
+      <div className="pb-[12vh] px-4 md:px-8 lg:px-20">
         {children}
         <div className="scroll-stack-end h-px w-full" />
       </div>
@@ -231,7 +231,7 @@ const ProjectsSection = memo(() => {
         <div className="py-8 md:py-12 px-6 md:px-16 lg:px-24">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-thin tracking-[0.2em] md:tracking-[0.3em] text-black mb-4">
-              PAST PROJECTS
+              PROJECTS
             </h2>
             <div className="w-24 h-px bg-black mx-auto mb-4"></div>
             <p className="text-sm md:text-base font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -245,11 +245,11 @@ const ProjectsSection = memo(() => {
 
       {/* ScrollStack Section */}
       <ScrollStack
-        itemDistance={60}
+        itemDistance={40}
         itemScale={0.03}
-        itemStackDistance={30}
+        itemStackDistance={50}
         stackPosition="20%"
-        scaleEndPosition="10%"
+        scaleEndPosition="5%"
         baseScale={0.90}
         blurAmount={1.5}
       >
