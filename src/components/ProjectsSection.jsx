@@ -5,7 +5,7 @@ import Lenis from 'lenis';
 //* -------------------- ScrollStackItem -------------------- */
 export const ScrollStackItem = ({ children, itemClassName = '' }) => (
   <div
-    className={`scroll-stack-card relative w-full p-6 md:p-12 rounded-3xl shadow-lg origin-top will-change-transform ${itemClassName}`}
+    className={`scroll-stack-card relative w-full p-6 md:p-8 origin-top will-change-transform ${itemClassName}`}
     style={{ backfaceVisibility: 'hidden' }}
   >
     {children}
@@ -149,8 +149,9 @@ export const ScrollStack = ({
 
     const lenis = new Lenis({
       smoothWheel: true,
-      duration: 1.1,
-      lerp: 0.08
+      duration: 0.8,
+      lerp: 0.12,
+      syncTouch: false
     })
 
     lenis.scrollTo(window.scrollY, { immediate: true })
@@ -191,36 +192,49 @@ const ProjectsSection = memo(() => {
   const projects = [
     {
       title: "AUREA",
-      description: "AUREA is an easy, fast, and efficient website builder that helps designers create stunning portfolios with a flexible template system. It removes the hassle of website setup, saves time, and lets creatives focus on their craft. AUREA also brings in the business side of design with built-in pricing tools and ready-to-use templates for real client work",
+      description: "AUREA is an easy, fast, and efficient website builder that helps designers create stunning portfolios with a flexible template system. Built using React + Vite with Tailwind CSS for modern, responsive UI. Optimized for SEO, performance, and fast load times. Features an interactive portfolio editor and pre-built templates for quick setup.",
       image: "/projects/aurea.webp",
       link: "https://www.aurea.tools/",
-      status: "Start up",
-      tags: ["Website Builder", "Start Up", "Digital Solution"],
+      date: "SEPTEMBER 2025",
+      status: "Live Product",
+      tags: ["React", "Vite", "Tailwind CSS", "SEO", "Portfolio Builder"],
       featured: true
     },
     {
-      title: "Netguardian",
-      description: "Netguardian is a network security monitoring dashboard designed to observe, count, and visualize incoming traffic in real time. It provides insight into request rates, active sources, and traffic behavior. Perfect for testing your stresser tools",
-      image: "/projects/Netguardian.webp",
-      link: "https://github.com/PromSereyreaksa/Netguardian",
-      status: "Working on",
-      tags: ["Network", "Monitoring", "Cybersecurity"]
-    },
-    {
       title: "Phsar Design",
-      description: "A marketplace connecting talented digital artists, designers, and creative professionals. Bring your vision to life with world-class creative services.",
+      description: "Creative freelancing platform connecting talented digital artists and designers. Built the frontend using React 18 + Vite with Redux Toolkit for state management and React Router v6 for navigation. Styled with Tailwind CSS for rapid UI development. Collaborated with backend teams for seamless UX.",
       image: "/projects/Phsardesign.webp",
       link: "https://phsardesign.vercel.app/",
+      date: "JULY 2025",
       status: "In Development",
-      tags: ["Startup", "Marketplace", "Creative Services", "React", "Express"]
+      tags: ["React", "Vite", "Redux Toolkit", "Tailwind CSS", "Freelancing"]
+    },
+    {
+      title: "StockMate",
+      description: "Offline-first stock management mobile app using Flutter with Clean Architecture. Features product CRUD operations, stock in/out tracking, low-stock alerts, and basic analytics dashboard. Uses local database storage for offline functionality.",
+      image: "/projects/aurea.webp",
+      link: "#",
+      date: "JANUARY 2026",
+      status: "Completed",
+      tags: ["Flutter", "Clean Architecture", "Mobile", "Offline-First"]
     },
     {
       title: "Automata Visualizer",
-      description: "An interactive tool for managing and visualizing finite state machines. Perfect for computer science students and professionals working with formal language theory.",
+      description: "Interactive educational tool demonstrating key concepts in automata theory and computational algorithms. Built with Python and additional programming languages for developing and testing automata-based solutions with efficient code structures and robust logic.",
       image: "/projects/Automata.webp",
       link: "https://automata-f6k9.onrender.com/",
-      status: "In Development",
-      tags: ["Education", "Visualization", "Computer Science", "React"]
+      date: "JULY 2025",
+      status: "Educational Project",
+      tags: ["Python", "Automata Theory", "Algorithms", "Education"]
+    },
+    {
+      title: "Basic Banking System",
+      description: "Full-stack banking system built with Java and Spring for GUI. Features user authentication, account management, and transaction handling. Applied OOP concepts including encapsulation, inheritance, abstraction, and polymorphism with clean architecture. Includes basic admin and staff management.",
+      image: "/projects/aurea.webp",
+      link: "#",
+      date: "MARCH 2025",
+      status: "Academic Project",
+      tags: ["Java", "Spring", "OOP", "Full-Stack", "Clean Architecture"]
     }
   ];
 
@@ -245,76 +259,70 @@ const ProjectsSection = memo(() => {
 
       {/* ScrollStack Section */}
       <ScrollStack
-        itemDistance={40}
-        itemScale={0.03}
-        itemStackDistance={50}
+        itemDistance={30}
+        itemScale={0.02}
+        itemStackDistance={40}
         stackPosition="20%"
         scaleEndPosition="5%"
-        baseScale={0.90}
-        blurAmount={1.5}
+        baseScale={0.92}
+        blurAmount={0}
       >
         {projects.map((project, index) => (
           <ScrollStackItem
             key={project.title}
-            itemClassName="bg-gradient-to-br from-gray-50 to-white border border-gray-200"
+            itemClassName="bg-white border-l-4 border-gray-300 hover:border-black transition-colors"
           >
-            <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
-              {/* Project Image */}
-              <div className="relative overflow-hidden rounded-2xl group">
-                <img
-                  src={project.image}
-                  alt={`${project.title} - Project Preview`}
-                  className="w-full h-48 md:h-64 lg:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                {project.featured && (
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-black text-white px-3 py-1.5 text-xs tracking-wider font-mono rounded">
-                      FEATURED
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Project Info */}
-              <div className="flex flex-col justify-center">
-                <div className="mb-4">
-                  <h3 className="text-xl md:text-2xl lg:text-3xl font-light tracking-wide text-black mb-3">
+            <div className="flex flex-col">
+              {/* Header with Title and Date */}
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
+                <div className="flex-1">
+                  <h3 className="text-xl md:text-2xl font-medium tracking-wide text-black mb-2">
                     {project.title}
                   </h3>
-                  <div className="flex items-center space-x-2 mb-4">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-600 font-medium">{project.status}</span>
+                  {project.featured && (
+                    <span className="inline-block bg-black text-white px-2 py-1 text-xs tracking-wider font-mono mb-2">
+                      FEATURED
+                    </span>
+                  )}
+                </div>
+                <div className="flex flex-col items-start md:items-end gap-1 flex-shrink-0">
+                  <span className="text-sm font-mono text-gray-600">{project.date}</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-xs text-gray-600">{project.status}</span>
                   </div>
                 </div>
+              </div>
 
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed mb-6">
-                  {project.description}
-                </p>
+              {/* Description */}
+              <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                {project.description}
+              </p>
 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs tracking-wide rounded transition-colors"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-gray-100 text-gray-700 text-xs tracking-wide"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
+              {/* Link */}
+              {project.link !== "#" && (
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center group w-fit"
+                  className="inline-flex items-center group w-fit text-sm text-gray-600 hover:text-black transition-colors"
                 >
-                  <span className="text-sm tracking-wider text-black font-medium group-hover:text-gray-600 transition-colors">
-                    VISIT PROJECT
-                  </span>
-                  <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <span className="tracking-wide">View Project</span>
+                  <ExternalLink className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </a>
-              </div>
+              )}
             </div>
           </ScrollStackItem>
         ))}
