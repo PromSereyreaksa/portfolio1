@@ -1,9 +1,13 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isPortfolioPage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,12 +23,25 @@ export default function Navigation() {
   };
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // Update URL hash for SEO
-      window.history.pushState(null, null, `#${sectionId}`);
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false); // Close mobile menu after clicking
+    if (isPortfolioPage) {
+      // Already on portfolio page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        window.history.pushState(null, null, `#${sectionId}`);
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsOpen(false);
+      }
+    } else {
+      // Navigate to portfolio first, then scroll
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          window.history.pushState(null, null, `#${sectionId}`);
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      setIsOpen(false);
     }
   };
 
@@ -81,6 +98,13 @@ export default function Navigation() {
               VISUAL WORK
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 ease-out group-hover:w-full"></span>
             </a>
+            <Link
+              to="/blog"
+              className="relative text-sm tracking-wide text-gray-700 hover:text-black transition-colors cursor-pointer group"
+            >
+              BLOG
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 ease-out group-hover:w-full"></span>
+            </Link>
             <a 
               href="/contact"
               onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
@@ -141,6 +165,14 @@ export default function Navigation() {
               PROJECTS
               <span className="absolute left-4 bottom-1 w-0 h-0.5 bg-black transition-all duration-300 ease-out group-hover:w-20"></span>
             </a>
+            <Link
+              to="/blog"
+              onClick={() => setIsOpen(false)}
+              className="relative block w-full text-left px-4 py-3 text-sm tracking-wide text-gray-700 hover:text-black hover:bg-gray-50 transition-all duration-200 cursor-pointer group"
+            >
+              BLOG
+              <span className="absolute left-4 bottom-1 w-0 h-0.5 bg-black transition-all duration-300 ease-out group-hover:w-10"></span>
+            </Link>
             <a
               href="/visual-work"
               onClick={(e) => { e.preventDefault(); scrollToSection('visual-work'); }}

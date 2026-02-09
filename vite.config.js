@@ -20,11 +20,28 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Core React libraries (critical)
-          vendor: ['react', 'react-dom'],
+          vendor: ['react', 'react-dom', 'react-router-dom'],
           // UI components (critical for LCP)
           ui: ['lucide-react'],
           // Analytics (defer loading)
           analytics: ['@vercel/analytics'],
+          // Supabase and API libraries
+          supabase: ['@supabase/supabase-js', 'dompurify', 'date-fns'],
+          // Blog components (lazy load)
+          blog: [
+            './src/components/blog/BlogPage.jsx',
+            './src/components/blog/BlogPost.jsx',
+            './src/components/blog/BlogCard.jsx'
+          ],
+          // Admin components (lazy load)
+          admin: [
+            './src/components/admin/AdminLogin.jsx',
+            './src/components/admin/AdminLayout.jsx',
+            './src/components/admin/AdminPosts.jsx',
+            './src/components/admin/AdminPostEditor.jsx',
+            './src/components/admin/AdminStats.jsx',
+            'react-quill-new'
+          ],
           // Non-critical sections (lazy load)
           sections: [
             './src/components/aboutSection.jsx',
@@ -54,7 +71,7 @@ export default defineConfig({
     assetsInlineLimit: 2048 // Inline small assets (<2KB)
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'lucide-react'],
+    include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
     exclude: ['@vercel/analytics'] // Defer analytics
   },
   // Development server configuration
@@ -65,7 +82,15 @@ export default defineConfig({
     // Prevent CORS issues
     cors: true,
     // Enable HTTP/2 for better performance
-    https: false
+    https: false,
+    // Proxy API requests to Vercel functions in development
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false
+      }
+    }
   },
   // Additional optimizations
   define: {

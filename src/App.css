@@ -149,3 +149,242 @@ h1, h2, h3 {
 .animate-scroll:hover {
   animation-play-state: paused;
 }
+
+/* ========================================
+   Blog Content Styles (Prose)
+   ======================================== */
+
+.blog-content {
+  font-family: 'Inter', sans-serif;
+  color: #374151;
+  line-height: 1.75;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  color: #111827;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3;
+}
+
+.blog-content h1 {
+  font-size: 2.25em;
+  margin-top: 0;
+}
+
+.blog-content h2 {
+  font-size: 1.875em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.blog-content h3 {
+  font-size: 1.5em;
+}
+
+.blog-content h4 {
+  font-size: 1.25em;
+}
+
+.blog-content p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.blog-content a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.blog-content a:hover {
+  color: #1e40af;
+}
+
+.blog-content strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.blog-content em {
+  font-style: italic;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.blog-content li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.blog-content ul > li {
+  list-style-type: disc;
+}
+
+.blog-content ol > li {
+  list-style-type: decimal;
+}
+
+.blog-content blockquote {
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-left: 1em;
+  border-left: 4px solid #e5e7eb;
+  font-style: italic;
+  color: #6b7280;
+}
+
+.blog-content code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.875em;
+  background-color: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  color: #dc2626;
+}
+
+.blog-content pre {
+  margin-top: 1.7em;
+  margin-bottom: 1.7em;
+  padding: 1em 1.5em;
+  background-color: #1f2937;
+  color: #f9fafb;
+  border-radius: 8px;
+  overflow-x: auto;
+  line-height: 1.7;
+}
+
+.blog-content pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: 0.875em;
+  border-radius: 0;
+}
+
+.blog-content img {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.blog-content hr {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+.blog-content table {
+  width: 100%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-collapse: collapse;
+  font-size: 0.875em;
+}
+
+.blog-content thead {
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.blog-content th {
+  padding: 0.75em 1em;
+  text-align: left;
+  font-weight: 600;
+  color: #111827;
+}
+
+.blog-content td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ========================================
+   React Quill Editor Overrides
+   ======================================== */
+
+.ql-toolbar.ql-snow {
+  border: 1px solid #d1d5db !important;
+  border-bottom: none !important;
+  background-color: #f9fafb;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid #d1d5db !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+}
+
+.ql-editor {
+  min-height: 400px;
+  padding: 1.5rem;
+}
+
+.ql-editor.ql-blank::before {
+  color: #9ca3af;
+  font-style: normal;
+}
+
+.ql-snow .ql-stroke {
+  stroke: #6b7280;
+}
+
+.ql-snow .ql-fill {
+  fill: #6b7280;
+}
+
+.ql-snow .ql-picker-label {
+  color: #374151;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label:hover,
+.ql-toolbar.ql-snow button:hover {
+  color: #111827;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label:hover .ql-stroke,
+.ql-toolbar.ql-snow button:hover .ql-stroke {
+  stroke: #111827;
+}
+
+.ql-snow.ql-toolbar button.ql-active,
+.ql-snow .ql-toolbar button.ql-active {
+  color: #2563eb !important;
+}
+
+.ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke {
+  stroke: #2563eb !important;
+}
+
+/* ========================================
+   Line Clamp Utilities
+   ======================================== */
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}

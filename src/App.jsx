@@ -1,5 +1,6 @@
 
 import { lazy, Suspense, useEffect, Component } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import Navigation from './components/Navigation.jsx'
 import LandingSection from './components/landingSection.jsx'
@@ -64,19 +65,21 @@ const BrutalistArtworkSection = lazy(() => import('./components/BrutalistArtwork
 const ContactSection = lazy(() => import('./components/ContactSection.jsx'))
 const IntroTransition = lazy(() => import('./components/IntroTransition.jsx'))
 const ProjectsSection = lazy(() => import('./components/ProjectsSection.jsx'))
+const BlogPreviewSection = lazy(() => import('./components/BlogPreviewSection.jsx'))
 
-function App() {
-  // Debug deployment issues
-  useEffect(() => {
-    console.log('App mounted successfully');
-    console.log('Environment:', {
-      mode: import.meta.env.MODE,
-      base: import.meta.env.BASE_URL,
-      prod: import.meta.env.PROD,
-      dev: import.meta.env.DEV
-    });
-  }, []);
+// Lazy load blog components
+const BlogPage = lazy(() => import('./components/blog/BlogPage.jsx'))
+const BlogPost = lazy(() => import('./components/blog/BlogPost.jsx'))
 
+// Lazy load admin components
+const AdminLogin = lazy(() => import('./components/admin/AdminLogin.jsx'))
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout.jsx'))
+const AdminPosts = lazy(() => import('./components/admin/AdminPosts.jsx'))
+const AdminPostEditor = lazy(() => import('./components/admin/AdminPostEditor.jsx'))
+const AdminStats = lazy(() => import('./components/admin/AdminStats.jsx'))
+
+// Portfolio page component (original layout)
+function PortfolioPage() {
   // Handle URL changes and scroll to sections for SEO and UX
   useEffect(() => {
     const handleHashChange = () => {
@@ -121,41 +124,122 @@ function App() {
   };
 
   return (
+    <>
+      {/* Landing section optimized for LCP */}
+      <div id="landing">
+        <LandingSection />
+      </div>
+
+      {/* Intro animation */}
+      <Suspense fallback={<div className="h-20"></div>}>
+        <IntroTransition />
+      </Suspense>
+
+      {/* Lazy loaded sections */}
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-pulse text-gray-500">Loading...</div>
+        </div>
+      }>
+        <div id="about">
+          <AboutSection />
+        </div>
+        <div id="projects">
+          <ProjectsSection />
+        </div>
+        <BlogPreviewSection />
+        <div id="visual-work">
+          <BrutalistArtworkSection />
+        </div>
+        <div id="contact">
+          <ContactSection />
+        </div>
+      </Suspense>
+    </>
+  );
+}
+
+function App() {
+  const adminPath = import.meta.env.VITE_ADMIN_PATH || 'admin';
+
+  // Debug deployment issues
+  useEffect(() => {
+    console.log('App mounted successfully');
+    console.log('Environment:', {
+      mode: import.meta.env.MODE,
+      base: import.meta.env.BASE_URL,
+      prod: import.meta.env.PROD,
+      dev: import.meta.env.DEV
+    });
+  }, []);
+
+  return (
     <ErrorBoundary>
       <div className="App">
-        {/* Always visible components - critical path */}
-        <Navigation />
-        
-        {/* Landing section optimized for LCP */}
-        <div id="landing">
-          <LandingSection />
-        </div>
+        <Routes>
+          {/* Portfolio Page */}
+          <Route path="/" element={
+            <>
+              <Navigation />
+              <PortfolioPage />
+            </>
+          } />
 
-        {/* Intro animation */}
-        <Suspense fallback={<div className="h-20"></div>}>
-          <IntroTransition />
-        </Suspense>
+          {/* Blog Routes */}
+          <Route path="/blog" element={
+            <>
+              <Navigation />
+              <Suspense fallback={
+                <div className="min-h-screen flex items-center justify-center">
+                  <div className="animate-pulse text-gray-500">Loading...</div>
+                </div>
+              }>
+                <BlogPage />
+              </Suspense>
+            </>
+          } />
 
-        {/* Lazy loaded sections */}
-        <Suspense fallback={
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="animate-pulse text-gray-500">Loading...</div>
-          </div>
-        }>
-          <div id="about">
-            <AboutSection />
-          </div>
-          <div id="projects">
-            <ProjectsSection />
-          </div>
-          <div id="visual-work">
-            <BrutalistArtworkSection />
-          </div>
-          <div id="contact">
-            <ContactSection />
-          </div>
-        </Suspense>
-        
+          <Route path="/blog/:slug" element={
+            <Suspense fallback={
+              <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-pulse text-gray-500">Loading...</div>
+              </div>
+            }>
+              <BlogPost />
+            </Suspense>
+          } />
+
+          {/* Admin Routes */}
+          <Route path={`/${adminPath}`} element={
+            <Suspense fallback={
+              <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-pulse text-gray-500">Loading...</div>
+              </div>
+            }>
+              <AdminLogin />
+            </Suspense>
+          } />
+
+          <Route path={`/${adminPath}/dashboard`} element={
+            <Suspense fallback={
+              <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-pulse text-gray-500">Loading...</div>
+              </div>
+            }>
+              <AdminLayout />
+            </Suspense>
+          }>
+            <Route index element={<Navigate to="posts" replace />} />
+            <Route path="posts" element={<AdminPosts />} />
+            <Route path="create" element={<AdminPostEditor />} />
+            <Route path="edit/:postId" element={<AdminPostEditor />} />
+            <Route path="stats" element={<AdminStats />} />
+          </Route>
+
+          {/* Catch-all redirect */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+
         {/* Defer analytics loading */}
         <Suspense fallback={null}>
           <Analytics />
