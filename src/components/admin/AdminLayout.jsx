@@ -78,16 +78,16 @@ export default function AdminLayout() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-200 z-40 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-200 z-40 transform transition-transform duration-300 flex flex-col ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-gray-200 flex-shrink-0">
           <h2 className="text-xl font-thin tracking-[0.3em] text-black">ADMIN</h2>
-          <p className="text-xs text-gray-500 mt-2">{user?.email}</p>
+          <p className="text-xs text-gray-500 mt-2 break-all">{user?.email}</p>
         </div>
 
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 flex-grow overflow-y-auto">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname.includes(item.path);
@@ -111,7 +111,7 @@ export default function AdminLayout() {
         </nav>
 
         {/* Logout */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200 flex-shrink-0">
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 w-full px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors tracking-wide"
@@ -123,8 +123,8 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="lg:pl-64 min-h-screen">
-        <div className="p-8 lg:p-12">
+      <main className="lg:pl-64 min-h-screen overflow-x-hidden">
+        <div className="p-8 lg:p-12 max-w-full">
           <Outlet />
         </div>
       </main>

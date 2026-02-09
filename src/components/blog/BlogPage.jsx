@@ -38,7 +38,7 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-white pt-20 overflow-x-hidden">
       {/* Header */}
       <div className="sticky top-20 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="py-8 md:py-12 px-8 md:px-16 lg:px-24">

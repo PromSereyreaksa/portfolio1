@@ -1,4 +1,42 @@
 @import "tailwindcss";
+
 #root {
   min-height: 100vh;
+}
+
+/* Blog Content Styles - Prevent Overflow */
+.blog-content {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.blog-content * {
+  max-width: 100%;
+}
+
+.blog-content img {
+  height: auto;
+}
+
+.blog-content pre {
+  overflow-x: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.blog-content code {
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+.blog-content table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.blog-content a {
+  word-break: break-all;
 }

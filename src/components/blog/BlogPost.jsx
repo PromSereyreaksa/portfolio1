@@ -55,7 +55,7 @@ export default function BlogPost() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white pt-20">
+      <div className="min-h-screen bg-white pt-20 overflow-x-hidden">
         <div className="animate-pulse py-16 px-8 md:px-16 lg:px-24">
           <div className="max-w-4xl mx-auto">
             <div className="h-8 bg-gray-200 rounded w-1/4 mb-8"></div>
@@ -83,7 +83,7 @@ export default function BlogPost() {
   const sanitizedContent = DOMPurify.sanitize(post.content);
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-white pt-20 overflow-x-hidden">
       {/* Back to Blog */}
       <div className="py-6 px-8 md:px-16 lg:px-24 border-b border-gray-100">
         <div className="max-w-4xl mx-auto">
@@ -117,12 +117,12 @@ export default function BlogPost() {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-thin tracking-wide text-black mb-6 leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-thin tracking-wide text-black mb-6 leading-tight break-words">
             {post.title}
           </h1>
 
           {/* Description */}
-          <p className="text-lg text-gray-600 leading-relaxed mb-12 pb-12 border-b border-gray-200">
+          <p className="text-lg text-gray-600 leading-relaxed mb-12 pb-12 border-b border-gray-200 break-words">
             {post.description}
           </p>
 
@@ -139,7 +139,7 @@ export default function BlogPost() {
 
           {/* Content */}
           <div
-            className="blog-content prose prose-lg max-w-none"
+            className="blog-content prose prose-lg max-w-none break-words overflow-hidden"
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
         </div>

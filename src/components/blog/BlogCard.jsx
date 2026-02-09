@@ -41,12 +41,12 @@ export default function BlogCard({ post }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-medium tracking-wide text-black mb-3 group-hover:text-gray-700 transition-colors line-clamp-2">
+        <h3 className="text-xl font-medium tracking-wide text-black mb-3 group-hover:text-gray-700 transition-colors line-clamp-2 break-words">
           {post.title}
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
+        <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 break-words">
           {post.description}
         </p>
 

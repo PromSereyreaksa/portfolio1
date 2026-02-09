@@ -1,4 +1,6 @@
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
+import { BookOpen } from 'lucide-react';
 import OptimizedProfileImage from './OptimizedProfileImage';
 
 const LandingSection = memo(() => {
@@ -72,6 +74,17 @@ const LandingSection = memo(() => {
               />
               <p className="text-sm font-light text-gray-500">Video Editor at LUMINYX</p>
             </div>
+          </div>
+
+          {/* Read Blog Button */}
+          <div className="animate-fadeInUp-7 pt-4">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-black hover:bg-black hover:text-white transition-colors duration-300 text-sm tracking-wide group"
+            >
+              <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>READ BLOG</span>
+            </Link>
           </div>
         </div>
       </div>
