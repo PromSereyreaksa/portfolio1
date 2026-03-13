@@ -63,7 +63,6 @@ const Analytics = lazy(() =>
 const AboutSection = lazy(() => import('./components/aboutSection.jsx'))
 const BrutalistArtworkSection = lazy(() => import('./components/BrutalistArtworkSection.jsx'))
 const ContactSection = lazy(() => import('./components/ContactSection.jsx'))
-const IntroTransition = lazy(() => import('./components/IntroTransition.jsx'))
 const ProjectsSection = lazy(() => import('./components/ProjectsSection.jsx'))
 
 // Lazy load admin components
@@ -124,11 +123,6 @@ function PortfolioPage() {
       <div id="landing" className="section-anchor">
         <LandingSection />
       </div>
-
-      {/* Intro animation */}
-      <Suspense fallback={<div className="h-20"></div>}>
-        <IntroTransition />
-      </Suspense>
 
       {/* Lazy loaded sections */}
       <Suspense fallback={

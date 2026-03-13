@@ -12,27 +12,27 @@ function scrollToSection(sectionId) {
 
 const LandingSection = memo(() => {
   return (
-    <section className="hero-surface min-h-screen w-full pt-28 md:pt-32 pb-14 px-6 md:px-12 lg:px-20">
+    <section className="hero-surface min-h-[100svh] w-full pt-28 md:pt-32 pb-14 px-6 md:px-12 lg:px-20">
       <noscript>
         <div className="max-w-7xl mx-auto text-left">
           <h1 className="text-5xl font-medium tracking-wide text-black mb-4">Serey Reaksa Prom</h1>
-          <p className="text-xl text-zinc-700">Full-stack engineer building thoughtful digital products with clear UX.</p>
+          <p className="text-xl text-zinc-700">CS @ CADT | BEd TEFL @ IFL | Full-Stack Developer | Startup Builder | Building Web Tools, Dev Products &amp; Security Projects | leakscope.tech.</p>
         </div>
       </noscript>
 
       <div className="relative max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
         <div className="space-y-7 animate-fadeInUp-1">
           <span className="inline-flex items-center bg-white/70 px-3 py-1 rounded-full text-[11px] tracking-[0.2em] text-zinc-700">
-            CREATIVE TECHNOLOGIST FROM CAMBODIA
+            CREATIVE TECHNOLOGIST
           </span>
 
           <div className="space-y-4">
             <p className="text-sm md:text-base tracking-[0.16em] text-zinc-600">SEREY REAKSA PROM</p>
             <h1 className="text-[clamp(2.25rem,5vw,4.6rem)] leading-[0.98] font-semibold tracking-[0.02em] text-zinc-950">
-              I design and build digital products people enjoy using.
+              I design and build pratical real world digital products.
             </h1>
             <p className="max-w-2xl text-base md:text-lg leading-relaxed text-zinc-700">
-              Full-stack developer focused on product execution, strong UX, and clean systems that make complex ideas feel simple.
+              CS @ CADT | BEd TEFL @ IFL | Full-Stack Developer | Startup Builder | Building Web Tools, Dev Products &amp; Security Projects | leakscope.tech.
             </p>
           </div>
 
@@ -89,5 +89,3 @@ const LandingSection = memo(() => {
 LandingSection.displayName = 'LandingSection';
 
 export default LandingSection;
-
-

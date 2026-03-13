@@ -6,6 +6,7 @@ const featuredProject = {
   subtitle: 'Automated black-box security scanner for Supabase apps',
   image: '/projects/LeakScope.png',
   link: 'https://leakscope.tech',
+  productHuntLink: 'https://www.producthunt.com/products/leakscope-supabase-security-auditor',
   timeline: 'MARCH 2026 - PRESENT',
   role: 'Founder and Full-stack Engineer',
   challenge:
@@ -70,11 +71,13 @@ const ProjectsSection = memo(() => {
           </p>
         </div>
 
-        <article className="grid lg:grid-cols-[1.05fr_0.95fr] bg-white rounded-2xl overflow-hidden mb-8 md:mb-10">
-          <div className="relative min-h-[300px] md:min-h-[420px]">
+        <article className="grid lg:grid-cols-[minmax(320px,560px)_1fr] bg-white rounded-2xl overflow-hidden mb-8 md:mb-10">
+          <div className="relative aspect-square w-full">
             <img
               src={featuredProject.image}
               alt="LeakScope project dashboard preview"
+              width="1080"
+              height="1080"
               className="absolute inset-0 w-full h-full object-cover"
               loading="lazy"
               decoding="async"
@@ -123,15 +126,26 @@ const ProjectsSection = memo(() => {
               ))}
             </div>
 
-            <a
-              href={featuredProject.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition-colors text-sm tracking-[0.12em]"
-            >
-              <span>VIEW LIVE PRODUCT</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={featuredProject.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition-colors text-sm tracking-[0.12em]"
+              >
+                <span>VIEW LIVE PRODUCT</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+              <a
+                href={featuredProject.productHuntLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-zinc-300 bg-white text-zinc-800 hover:border-zinc-900 hover:text-zinc-950 transition-colors text-sm tracking-[0.04em]"
+              >
+                <span>Check us out on Product Hunt</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </article>
 

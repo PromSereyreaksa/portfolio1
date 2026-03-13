@@ -143,10 +143,10 @@ h6 {
 /* Infinite Scroll Animation */
 @keyframes scroll {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -236,8 +236,7 @@ h6 {
   .animate-fadeInUp-4,
   .animate-fadeInUp-5,
   .animate-fadeInUp-6,
-  .animate-fadeInUp-7,
-  .animate-scroll {
+  .animate-fadeInUp-7 {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

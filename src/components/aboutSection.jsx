@@ -18,13 +18,6 @@ import {
 } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 
-const highlights = [
-  { label: 'Years building', value: '3+' },
-  { label: 'Products shipped', value: '6' },
-  { label: 'Core focus', value: 'Product + UX' },
-  { label: 'Current base', value: 'Phnom Penh' }
-];
-
 const experience = [
   {
     title: 'Team Lead',
@@ -80,49 +73,40 @@ const AboutSection = memo(() => {
           <header className="text-center mb-12 md:mb-14">
             <p className="text-xs tracking-[0.22em] text-zinc-500 mb-3">ABOUT</p>
             <h2 className="display-hero text-zinc-950 mb-6">ABOUT ME</h2>
-            <div className="max-w-5xl mx-auto space-y-6">
-              <div className="pl-6 text-left">
-                <p className="text-md text-zinc-700 leading-relaxed mb-4">
-                  I am an ambitious, motivated, and curious Computer Science student with an entrepreneurial mindset and a passion
-                  for solving real-world problems. Analytical and proactive, I bring experience in teamwork, leadership, volunteering,
-                  and project delivery. I thrive on learning, collaboration, and taking initiative, consistently seeking to create
-                  meaningful impact in every endeavor.
-                </p>
-                <p className="text-md text-zinc-600 leading-relaxed italic">
-                  Fullstack developer focused on security, product quality, and practical impact.
-                </p>
-              </div>
+            <div className="w-full text-left space-y-4">
+              <p className="text-md text-zinc-700 leading-relaxed">
+                I am an ambitious, motivated, and curious Computer Science student with an entrepreneurial mindset and a passion
+                for solving real-world problems. Analytical and proactive, I bring experience in teamwork, leadership, volunteering,
+                and project delivery. I thrive on learning, collaboration, and taking initiative, consistently seeking to create
+                meaningful impact in every endeavor.
+              </p>
+              <p className="text-md text-zinc-700 leading-relaxed">
+                I have been building for 3+ years and shipped 6 products. My core focus is applying theory into practical real-world
+                systems, and I am currently based in Phnom Penh.
+              </p>
+              <p className="text-md text-zinc-600 leading-relaxed italic">
+                Fullstack developer focused on security, product quality, and practical impact.
+              </p>
             </div>
           </header>
-        </ScrollAnimationWrapper>
-
-        <ScrollAnimationWrapper animation="fadeInUp" delay={120}>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-12 md:mb-14">
-            {highlights.map((item) => (
-              <article key={item.label} className="bg-zinc-50 rounded-xl px-4 py-4">
-                <p className="text-xs tracking-[0.14em] text-zinc-500 mb-2">{item.label}</p>
-                <p className="text-lg md:text-xl text-zinc-900 font-medium">{item.value}</p>
-              </article>
-            ))}
-          </div>
         </ScrollAnimationWrapper>
 
         <ScrollAnimationWrapper animation="fadeInUp" delay={160}>
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-10 mb-14 md:mb-16">
             <article className="p-5 md:p-7 bg-white rounded-2xl">
               <p className="text-xs tracking-[0.18em] text-zinc-500 mb-3">CURRENT FOCUS</p>
-              <h3 className="display-brutal text-zinc-900 mb-3">Shipping useful products</h3>
+              <h3 className="display-brutal text-zinc-900 mb-3">LeakScope</h3>
               <p className="text-sm md:text-base text-zinc-700 leading-relaxed mb-5">
-                I am currently co-leading AUREA while building and iterating real products with practical impact.
-                I care about clean implementation, great user experience, and measurable outcomes.
+                I am currently building LeakScope, a security-focused platform for practical real-world systems.
+                The goal is to ship useful tools with clear UX and strong execution quality.
               </p>
               <a
-                href="https://www.aurea.tools/"
+                href="https://leakscope.tech/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm tracking-[0.1em] text-blue-700 hover:text-blue-900 transition-colors"
               >
-                <span>VISIT AUREA</span>
+                <span>VISIT LEAKSCOPE</span>
                 <ExternalLink className="w-4 h-4" />
               </a>
             </article>
@@ -201,7 +185,7 @@ const AboutSection = memo(() => {
             </div>
 
             <div className="w-full overflow-hidden rounded-2xl bg-zinc-50 py-6">
-              <div className="flex animate-scroll">
+              <div className="flex w-max animate-scroll will-change-transform">
                 <div className="flex items-center gap-16 px-8">
                   <SiReact className="text-[#61DAFB] w-12 h-12 flex-shrink-0" title="React" />
                   <SiJavascript className="text-[#F7DF1E] w-12 h-12 flex-shrink-0" title="JavaScript" />
