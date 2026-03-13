@@ -4,7 +4,7 @@ import { ArrowUpRight, ExternalLink, Github } from 'lucide-react';
 const featuredProject = {
   title: 'LeakScope',
   subtitle: 'Automated black-box security scanner for Supabase apps',
-  image: '/projects/LeakScope.png',
+  image: '/projects/LeakScope1.png',
   link: 'https://leakscope.tech',
   productHuntLink: 'https://www.producthunt.com/products/leakscope-supabase-security-auditor',
   timeline: 'MARCH 2026 - PRESENT',
