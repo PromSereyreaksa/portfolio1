@@ -29,17 +29,8 @@ export default function IntroTransition() {
   return (
     <div 
       ref={sectionRef}
-      className="relative h-80 flex items-center justify-center bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden px-4 my-16"
+      className="relative h-80 flex items-center justify-center overflow-hidden px-4 my-16"
     >
-      {/* Animated divider line */}
-      <div 
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 h-px bg-gradient-to-r from-transparent via-black to-transparent transition-all duration-1000"
-        style={{ 
-          width: `${Math.min(100, progress * 300)}%`,
-          opacity: isVisible ? 1 : 0
-        }}
-      />
-
       {/* Central animated element */}
       <div 
         className="text-center"
@@ -69,15 +60,6 @@ export default function IntroTransition() {
           Explore
         </h3>
 
-        {/* Expanding underline */}
-        <div 
-          className="h-px bg-black mx-auto mb-6 transition-all duration-1000 delay-500"
-          style={{ 
-            width: isVisible ? '64px' : '0px',
-            opacity: isVisible ? 0.6 : 0
-          }}
-        />
-
         {/* Subtitle */}
         <p 
           className="text-sm font-light tracking-widest text-gray-600 max-w-full px-4"
@@ -105,15 +87,6 @@ export default function IntroTransition() {
           }}
         />
       ))}
-
-      {/* Bottom divider */}
-      <div 
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-px bg-gradient-to-r from-transparent via-black to-transparent transition-all duration-1000 delay-300"
-        style={{ 
-          width: `${Math.min(80, progress * 200)}%`,
-          opacity: isVisible ? 0.3 : 0
-        }}
-      />
     </div>
   );
 }

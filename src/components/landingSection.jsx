@@ -1,90 +1,84 @@
-import { memo } from 'react';
-import { Link } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
+﻿import { memo } from 'react';
+import { ArrowRight, Download, Mail } from 'lucide-react';
 import OptimizedProfileImage from './OptimizedProfileImage';
+
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (!element) return;
+
+  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  window.history.pushState(null, '', `#${sectionId}`);
+}
 
 const LandingSection = memo(() => {
   return (
-    <section 
-      className="relative flex items-center justify-center min-h-screen w-full px-8 md:px-16 lg:px-24 pt-20 md:pt-0 mb-12 overflow-hidden bg-white"
-    >
-      {/* Fallback content for crawlers - always visible */}
+    <section className="hero-surface min-h-screen w-full pt-28 md:pt-32 pb-14 px-6 md:px-12 lg:px-20">
       <noscript>
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-6xl font-thin tracking-wider text-black mb-4">SEREY REAKSA PROM</h1>
-          <p className="text-xl font-light text-gray-800 mb-2">Creative Technologist</p>
-          <p className="text-base text-gray-600">Software Developer</p>
+        <div className="max-w-7xl mx-auto text-left">
+          <h1 className="text-5xl font-medium tracking-wide text-black mb-4">Serey Reaksa Prom</h1>
+          <p className="text-xl text-zinc-700">Full-stack engineer building thoughtful digital products with clear UX.</p>
         </div>
       </noscript>
-      
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        
-        {/* Avatar - Optimized profile image for LCP */}
-        <div className="flex justify-center md:justify-end animate-fadeInLeft">
-          <OptimizedProfileImage />
+
+      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
+        <div className="space-y-7 animate-fadeInUp-1">
+          <span className="inline-flex items-center bg-white/70 px-3 py-1 rounded-full text-[11px] tracking-[0.2em] text-zinc-700">
+            CREATIVE TECHNOLOGIST FROM CAMBODIA
+          </span>
+
+          <div className="space-y-4">
+            <p className="text-sm md:text-base tracking-[0.16em] text-zinc-600">SEREY REAKSA PROM</p>
+            <h1 className="text-[clamp(2.25rem,5vw,4.6rem)] leading-[0.98] font-semibold tracking-[0.02em] text-zinc-950">
+              I design and build digital products people enjoy using.
+            </h1>
+            <p className="max-w-2xl text-base md:text-lg leading-relaxed text-zinc-700">
+              Full-stack developer focused on product execution, strong UX, and clean systems that make complex ideas feel simple.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 pt-2 animate-fadeInUp-3">
+            <button
+              type="button"
+              onClick={() => scrollToSection('projects')}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition-colors duration-200 text-sm tracking-[0.14em] cursor-pointer"
+            >
+              <span>VIEW PROJECTS</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => scrollToSection('contact')}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/90 text-zinc-800 hover:bg-white hover:text-zinc-950 transition-colors duration-200 text-sm tracking-[0.12em] cursor-pointer"
+            >
+              <Mail className="w-4 h-4" />
+              <span>HIRE ME</span>
+            </button>
+
+          </div>
+
+          <a
+            href="/CV/Prom Sereyreaksa-CV.pdf"
+            download="Prom-Sereyreaksa-CV.pdf"
+            className="inline-flex items-center gap-2 text-xs tracking-[0.16em] text-zinc-600 hover:text-zinc-900 transition-colors animate-fadeInUp-4"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>DOWNLOAD CV</span>
+          </a>
         </div>
 
-        {/* Minimal Text Content - All animated with CSS */}
-        <div className="text-center md:text-left space-y-8">
-          <div className="space-y-2 animate-fadeInUp-1">
-            <p className="text-lg md:text-xl font-light text-gray-600">Hello, My name is</p>
-          </div>
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-thin tracking-wide md:tracking-wider text-black max-w-full animate-fadeInUp-2">
-            SEREY REAKSA
-          </h1>
-          
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide md:tracking-widest text-gray-600 -mt-2 max-w-full animate-fadeInUp-3">
-            PROM
-          </h2>
-
-          <div className="w-16 h-px bg-black mx-auto md:mx-0 my-8 animate-fadeInUp-4"></div>
-
-          <div className="space-y-2 animate-fadeInUp-5">
-            <p className="text-lg md:text-xl font-light tracking-wide text-gray-800">
-              Creative Technologist
-            </p>
-            <p className="text-sm md:text-base font-light text-gray-600">
-              Software Developer
-            </p>
-          </div>
-
-          <div className="space-y-1 animate-fadeInUp-6">
-            
-            <p className="text-sm font-light text-gray-500">Cambodia Academy of Digital Technology</p>
-            <div className="flex items-center justify-center md:justify-start space-x-2">
-              <img 
-                src="/AUREA.webp" 
-                alt="AUREA" 
-                className="w-5 h-5 rounded-full flex-shrink-0"
-                width="20"
-                height="20"
-                loading="lazy"
-                decoding="async"
-              />
-              <p className="text-sm font-light text-gray-500">Co Founder of AUREA</p>
-              <img 
-                src="/Luminyx-1.webp" 
-                alt="Luminyx Logo" 
-                className="w-5 h-5 rounded-full flex-shrink-0"
-                width="20"
-                height="20"
-                loading="lazy"
-                decoding="async"
-              />
-              <p className="text-sm font-light text-gray-500">Video Editor at LUMINYX</p>
+        <div className="animate-fadeInLeft">
+          <div className="relative mx-auto w-[320px] md:w-[384px] lg:w-[448px]">
+            <div className="absolute -inset-10 bg-gradient-to-br from-blue-100/40 to-zinc-300/20 -z-10 blur-2xl" aria-hidden="true" />
+            <div className="relative bg-white rounded-2xl overflow-hidden">
+              <div className="aspect-square">
+                <OptimizedProfileImage />
+              </div>
+              <div className="px-4 md:px-6 py-4 flex items-center justify-between text-[11px] tracking-[0.14em] text-zinc-600">
+                <span>PHNOM PENH</span>
+                <span>OPEN TO INTERNSHIPS & FREELANCE</span>
+              </div>
             </div>
-          </div>
-
-          {/* Read Blog Button */}
-          <div className="animate-fadeInUp-7 pt-4">
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-black hover:bg-black hover:text-white transition-colors duration-300 text-sm tracking-wide group"
-            >
-              <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span>READ BLOG</span>
-            </Link>
           </div>
         </div>
       </div>
@@ -95,3 +89,5 @@ const LandingSection = memo(() => {
 LandingSection.displayName = 'LandingSection';
 
 export default LandingSection;
+
+

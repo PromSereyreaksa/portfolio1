@@ -1,12 +1,16 @@
-@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 
-/* Vogue-Style Custom Fonts */
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
-h1, h2, h3 {
-  font-family: 'Cormorant Garamond', serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Archivo", sans-serif;
 }
 
 #root {
@@ -19,7 +23,7 @@ h1, h2, h3 {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* CSS Animations for immediate visibility with staggered timing */
+/* Entrance animations */
 @keyframes fadeInLeft {
   from {
     opacity: 0;
@@ -154,12 +158,105 @@ h1, h2, h3 {
   animation-play-state: paused;
 }
 
+/* Shared section spacing utility */
+.section-shell {
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+}
+
+.display-hero {
+  font-size: clamp(2.1rem, 6vw, 4.6rem);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.display-brutal {
+  font-size: clamp(1.5rem, 4.4vw, 3rem);
+  line-height: 0.96;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.hero-surface {
+  background: transparent;
+}
+
+.hero-surface::before {
+  display: none;
+}
+
+.hero-surface::after {
+  display: none;
+}
+
+.portfolio-atmosphere {
+  position: relative;
+  background: linear-gradient(180deg, #fafafa 0%, #f9f9f9 55%, #fafafa 100%);
+}
+
+.portfolio-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(37, 99, 235, 0.035), transparent 52%),
+    radial-gradient(circle at 86% 82%, rgba(9, 9, 11, 0.022), transparent 58%);
+  opacity: 0.55;
+}
+
+.portfolio-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(9, 9, 11, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(9, 9, 11, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.035;
+}
+
+.portfolio-atmosphere > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-fadeInLeft,
+  .animate-fadeInUp-1,
+  .animate-fadeInUp-2,
+  .animate-fadeInUp-3,
+  .animate-fadeInUp-4,
+  .animate-fadeInUp-5,
+  .animate-fadeInUp-6,
+  .animate-fadeInUp-7,
+  .animate-scroll {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .transition-all,
+  .transition-colors,
+  .transition-opacity,
+  .transition-transform {
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ========================================
    Blog Content Styles (Prose)
    ======================================== */
 
 .blog-content {
-  font-family: 'Inter', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   color: #374151;
   line-height: 1.75;
 }
@@ -170,7 +267,7 @@ h1, h2, h3 {
 .blog-content h4,
 .blog-content h5,
 .blog-content h6 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Archivo", sans-serif;
   font-weight: 500;
   color: #111827;
   margin-top: 2em;
@@ -329,7 +426,7 @@ h1, h2, h3 {
 
 .ql-container.ql-snow {
   border: 1px solid #d1d5db !important;
-  font-family: 'Inter', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 16px;
 }
 

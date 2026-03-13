@@ -12,7 +12,7 @@ class ErrorBoundary extends Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     return { hasError: true };
   }
 
@@ -65,11 +65,6 @@ const BrutalistArtworkSection = lazy(() => import('./components/BrutalistArtwork
 const ContactSection = lazy(() => import('./components/ContactSection.jsx'))
 const IntroTransition = lazy(() => import('./components/IntroTransition.jsx'))
 const ProjectsSection = lazy(() => import('./components/ProjectsSection.jsx'))
-const BlogPreviewSection = lazy(() => import('./components/BlogPreviewSection.jsx'))
-
-// Lazy load blog components
-const BlogPage = lazy(() => import('./components/blog/BlogPage.jsx'))
-const BlogPost = lazy(() => import('./components/blog/BlogPost.jsx'))
 
 // Lazy load admin components
 const AdminLogin = lazy(() => import('./components/admin/AdminLogin.jsx'))
@@ -124,9 +119,9 @@ function PortfolioPage() {
   };
 
   return (
-    <>
+    <main id="main-content" className="portfolio-atmosphere">
       {/* Landing section optimized for LCP */}
-      <div id="landing">
+      <div id="landing" className="section-anchor">
         <LandingSection />
       </div>
 
@@ -141,21 +136,20 @@ function PortfolioPage() {
           <div className="animate-pulse text-gray-500">Loading...</div>
         </div>
       }>
-        <div id="about">
+        <div id="about" className="section-anchor">
           <AboutSection />
         </div>
-        <div id="projects">
+        <div id="projects" className="section-anchor">
           <ProjectsSection />
         </div>
-        <BlogPreviewSection />
-        <div id="visual-work">
+        <div id="visual-work" className="section-anchor">
           <BrutalistArtworkSection />
         </div>
-        <div id="contact">
+        <div id="contact" className="section-anchor">
           <ContactSection />
         </div>
       </Suspense>
-    </>
+    </main>
   );
 }
 
@@ -176,6 +170,9 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="App">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <Routes>
           {/* Portfolio Page */}
           <Route path="/" element={
@@ -185,30 +182,6 @@ function App() {
             </>
           } />
 
-          {/* Blog Routes */}
-          <Route path="/blog" element={
-            <>
-              <Navigation />
-              <Suspense fallback={
-                <div className="min-h-screen flex items-center justify-center">
-                  <div className="animate-pulse text-gray-500">Loading...</div>
-                </div>
-              }>
-                <BlogPage />
-              </Suspense>
-            </>
-          } />
-
-          <Route path="/blog/:slug" element={
-            <Suspense fallback={
-              <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-pulse text-gray-500">Loading...</div>
-              </div>
-            }>
-              <BlogPost />
-            </Suspense>
-          } />
-
           {/* Admin Routes */}
           <Route path={`/${adminPath}`} element={
             <Suspense fallback={
@@ -216,7 +189,9 @@ function App() {
                 <div className="animate-pulse text-gray-500">Loading...</div>
               </div>
             }>
-              <AdminLogin />
+              <main id="main-content">
+                <AdminLogin />
+              </main>
             </Suspense>
           } />
 
@@ -226,7 +201,9 @@ function App() {
                 <div className="animate-pulse text-gray-500">Loading...</div>
               </div>
             }>
-              <AdminLayout />
+              <main id="main-content">
+                <AdminLayout />
+              </main>
             </Suspense>
           }>
             <Route index element={<Navigate to="posts" replace />} />

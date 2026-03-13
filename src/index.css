@@ -1,7 +1,62 @@
 @import "tailwindcss";
 
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #09090b;
+  --text-muted: #3f3f46;
+  --border: #e4e4e7;
+  --accent: #2563eb;
+  --section-space: clamp(4.5rem, 8vw, 7rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
 #root {
   min-height: 100vh;
+}
+
+main {
+  min-height: 100vh;
+}
+
+.section-anchor {
+  scroll-margin-top: 6.5rem;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  transform: translateY(-200%);
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #09090b;
+  background: #ffffff;
+  color: #09090b;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 /* Blog Content Styles - Prevent Overflow */

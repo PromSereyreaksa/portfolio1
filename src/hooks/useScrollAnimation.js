@@ -2,8 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 
 export const useScrollAnimation = (options = {}) => {
   const elementRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
 
   const {
     threshold = 0.1,
@@ -13,10 +20,36 @@ export const useScrollAnimation = (options = {}) => {
   } = options;
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const handleMotionPreference = (event) => {
+      setPrefersReducedMotion(event.matches);
+      if (event.matches) {
+        setIsVisible(true);
+      } else if (!triggerOnce) {
+        setIsVisible(false);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleMotionPreference);
+
+    return () => mediaQuery.removeEventListener('change', handleMotionPreference);
+  }, [triggerOnce]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return undefined;
+    }
+
+    let timeoutId;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
+          timeoutId = window.setTimeout(() => {
             setIsVisible(true);
             if (triggerOnce) {
               setHasAnimated(true);
@@ -38,11 +71,14 @@ export const useScrollAnimation = (options = {}) => {
     }
 
     return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
       if (currentElement) {
         observer.unobserve(currentElement);
       }
     };
-  }, [threshold, rootMargin, triggerOnce, delay, hasAnimated]);
+  }, [threshold, rootMargin, triggerOnce, delay, hasAnimated, prefersReducedMotion]);
 
   return [elementRef, isVisible];
 };

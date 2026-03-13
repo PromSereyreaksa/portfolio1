@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Calendar, ArrowRight } from 'lucide-react';
@@ -22,7 +22,7 @@ export default function BlogPreviewSection() {
 
   if (loading) {
     return (
-      <section className="py-16 px-8 md:px-16 lg:px-24 bg-white border-t border-gray-200">
+      <section className="section-shell px-6 md:px-12 lg:px-20 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-gray-200 rounded w-1/4 mx-auto"></div>
@@ -34,7 +34,24 @@ export default function BlogPreviewSection() {
   }
 
   if (!latestPost) {
-    return null; // Don't show section if no posts
+    return (
+      <section className="section-shell px-6 md:px-12 lg:px-20 bg-white">
+        <div className="max-w-4xl mx-auto bg-zinc-50 rounded-2xl p-8 md:p-10 text-center">
+          <p className="text-xs tracking-[0.2em] text-zinc-500 mb-3">BLOG</p>
+          <h2 className="text-[clamp(1.9rem,5vw,3.4rem)] leading-[0.95] font-semibold text-zinc-950 mb-3">Writing in progress</h2>
+          <p className="text-sm md:text-base text-zinc-700 mb-6">
+            New technical writeups and product notes are coming soon.
+          </p>
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-700 hover:text-zinc-950 transition-colors duration-200 text-sm tracking-[0.12em]"
+          >
+            <span>VISIT BLOG PAGE</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+    );
   }
 
   const formattedDate = format(new Date(latestPost.created_at), 'MMMM dd, yyyy');
@@ -43,16 +60,16 @@ export default function BlogPreviewSection() {
     : '/placeholder.webp';
 
   return (
-    <section className="py-20 px-8 md:px-16 lg:px-24 bg-white border-t border-gray-200">
+    <section className="section-shell px-6 md:px-12 lg:px-20 bg-white">
       <div className="max-w-7xl mx-auto">
         <ScrollAnimationWrapper animation="fadeInUp" delay={100}>
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-thin tracking-[0.2em] md:tracking-[0.3em] text-black mb-4">
+            <p className="text-xs tracking-[0.2em] text-zinc-500 mb-3">BLOG</p>
+            <h2 className="display-hero text-zinc-950 mb-4">
               LATEST FROM BLOG
             </h2>
-            <div className="w-24 h-px bg-black mx-auto mb-4"></div>
-            <p className="text-sm md:text-base font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-zinc-700 max-w-2xl mx-auto leading-relaxed">
               Recent thoughts, tutorials, and insights
             </p>
           </div>
@@ -60,7 +77,7 @@ export default function BlogPreviewSection() {
           {/* Featured Post Card */}
           <Link
             to={`/blog/${latestPost.slug}`}
-            className="group block max-w-4xl mx-auto bg-white border-l-4 border-gray-300 hover:border-black transition-all duration-300"
+            className="group block max-w-5xl mx-auto bg-white rounded-2xl overflow-hidden shadow-[0_20px_60px_-45px_rgba(9,9,11,0.8)] transition-all duration-300"
           >
             <div className="grid md:grid-cols-2 gap-0">
               {/* Image */}
@@ -77,24 +94,24 @@ export default function BlogPreviewSection() {
               {/* Content */}
               <div className="p-8 md:p-10 flex flex-col justify-center">
                 {/* Date */}
-                <div className="flex items-center gap-2 mb-4 text-xs text-gray-500">
+                <div className="flex items-center gap-2 mb-4 text-xs text-zinc-500 tracking-[0.12em]">
                   <Calendar className="w-3 h-3" />
                   <span>{formattedDate}</span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-medium tracking-wide text-black mb-4 group-hover:text-gray-700 transition-colors">
+                <h3 className="display-brutal text-zinc-950 mb-4 group-hover:text-zinc-700 transition-colors">
                   {latestPost.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-gray-600 leading-relaxed mb-6 line-clamp-3">
+                <p className="text-sm text-zinc-700 leading-relaxed mb-6 line-clamp-3">
                   {latestPost.description}
                 </p>
 
                 {/* Read More */}
-                <div className="flex items-center text-sm text-gray-700 group-hover:text-black transition-colors">
-                  <span className="tracking-wide">Read Article</span>
+                <div className="flex items-center text-sm text-zinc-700 group-hover:text-zinc-950 transition-colors">
+                  <span className="tracking-[0.12em]">READ ARTICLE</span>
                   <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" />
                 </div>
               </div>
@@ -105,9 +122,9 @@ export default function BlogPreviewSection() {
           <div className="text-center mt-12">
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 px-8 py-3 border border-gray-300 text-gray-700 hover:border-black hover:text-black transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-zinc-100 text-zinc-700 hover:text-zinc-950 transition-colors duration-200"
             >
-              <span className="text-sm tracking-wide">VIEW ALL POSTS</span>
+              <span className="text-sm tracking-[0.12em]">VIEW ALL POSTS</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -116,3 +133,5 @@ export default function BlogPreviewSection() {
     </section>
   );
 }
+
+
