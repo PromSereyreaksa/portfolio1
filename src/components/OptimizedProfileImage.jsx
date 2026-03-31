@@ -49,7 +49,7 @@ const OptimizedProfileImage = memo(({ className = '' }) => {
               loading="eager"
               decoding="async"
               fetchPriority="high"
-              className={`w-full h-full object-cover transition-opacity duration-300 ${
+              className={`w-full h-full object-cover object-center transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
               }`}
               onLoad={handleImageLoad}

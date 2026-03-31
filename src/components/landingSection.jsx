@@ -1,91 +1,106 @@
-﻿import { memo } from 'react';
-import { ArrowRight, Download, Mail } from 'lucide-react';
+import { memo, useEffect, useState } from 'react';
 import OptimizedProfileImage from './OptimizedProfileImage';
 
-function scrollToSection(sectionId) {
-  const element = document.getElementById(sectionId);
-  if (!element) return;
+const rotatingPhrases = [
+  'digital products.',
+  'solutions.',
+  'tools.',
+  'software.'
+];
 
-  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  window.history.pushState(null, '', `#${sectionId}`);
-}
+const TYPING_SPEED = 85;
+const DELETING_SPEED = 48;
+const HOLD_DELAY = 1400;
 
 const LandingSection = memo(() => {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayedPhrase, setDisplayedPhrase] = useState(rotatingPhrases[0]);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const fullPhrase = rotatingPhrases[phraseIndex];
+    let timeoutId;
+
+    if (!isDeleting && displayedPhrase === fullPhrase) {
+      timeoutId = window.setTimeout(() => setIsDeleting(true), HOLD_DELAY);
+      return () => window.clearTimeout(timeoutId);
+    }
+
+    if (isDeleting && displayedPhrase.length === 0) {
+      setIsDeleting(false);
+      setPhraseIndex((i) => (i + 1) % rotatingPhrases.length);
+      return undefined;
+    }
+
+    timeoutId = window.setTimeout(() => {
+      setDisplayedPhrase((currentText) =>
+        isDeleting
+          ? currentText.slice(0, -1)
+          : fullPhrase.slice(0, currentText.length + 1)
+      );
+    }, isDeleting ? DELETING_SPEED : TYPING_SPEED);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [displayedPhrase, isDeleting, phraseIndex]);
+
   return (
-    <section className="hero-surface min-h-[100svh] w-full pt-28 md:pt-32 pb-14 px-6 md:px-12 lg:px-20">
+    <section className="hero-surface min-h-[100svh] w-full pt-28 md:pt-32 pb-14 px-6 sm:px-10 md:px-12 lg:px-20 overflow-hidden">
       <noscript>
         <div className="max-w-7xl mx-auto text-left">
           <h1 className="text-5xl font-medium tracking-wide text-black mb-4">Serey Reaksa Prom</h1>
-          <p className="text-xl text-zinc-700">CS @ CADT | BEd TEFL @ IFL | Full-Stack Developer | Startup Builder | Building Web Tools, Dev Products &amp; Security Projects | leakscope.tech.</p>
+          <p className="text-xl text-zinc-700">CS @ CADT | BEd TEFL @ IFL | Software Developer</p>
         </div>
       </noscript>
 
-      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
-        <div className="space-y-7 animate-fadeInUp-1">
-          <span className="inline-flex items-center bg-white/70 px-3 py-1 rounded-full text-[11px] tracking-[0.2em] text-zinc-700">
-            CREATIVE TECHNOLOGIST
-          </span>
+      <div className="relative max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-[minmax(0,1fr)_minmax(340px,400px)] lg:grid-cols-[minmax(0,1fr)_minmax(400px,470px)] xl:grid-cols-[minmax(0,1fr)_minmax(440px,520px)] gap-10 lg:gap-16 items-center">
 
+        {/* Text block */}
+        <div className="space-y-7 animate-fadeInUp-1 w-full text-center md:text-left">
           <div className="space-y-4">
-            <p className="text-sm md:text-base tracking-[0.16em] text-zinc-600">SEREY REAKSA PROM</p>
-            <h1 className="text-[clamp(2.25rem,5vw,4.6rem)] leading-[0.98] font-semibold tracking-[0.02em] text-zinc-950">
-              I design and build pratical real world digital products.
+            {/* clamp: min 1.8rem, scales with vw, max 5rem (original desktop size) */}
+            <h1
+              className="leading-[0.96] font-semibold tracking-[0.01em] text-zinc-950"
+              style={{ fontSize: 'clamp(1.8rem, 4.5vw, 5rem)' }}
+            >
+              I design and build practical real world{' '}
+              <span className="hero-typed-phrase italic text-zinc-500/80" aria-live="polite">
+                {displayedPhrase}
+              </span>
             </h1>
-            <p className="max-w-2xl text-base md:text-lg leading-relaxed text-zinc-700">
-              CS @ CADT | BEd TEFL @ IFL | Full-Stack Developer | Startup Builder | Building Web Tools, Dev Products &amp; Security Projects | leakscope.tech.
+            <p
+              className="leading-relaxed text-zinc-700 mx-auto md:mx-0"
+              style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.125rem)', maxWidth: '38rem' }}
+            >
+              CS @ CADT | BEd TEFL @ IFL | Software Developer
             </p>
           </div>
-
-          <div className="flex flex-wrap items-center gap-3 pt-2 animate-fadeInUp-3">
-            <button
-              type="button"
-              onClick={() => scrollToSection('projects')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition-colors duration-200 text-sm tracking-[0.14em] cursor-pointer"
-            >
-              <span>VIEW PROJECTS</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/90 text-zinc-800 hover:bg-white hover:text-zinc-950 transition-colors duration-200 text-sm tracking-[0.12em] cursor-pointer"
-            >
-              <Mail className="w-4 h-4" />
-              <span>HIRE ME</span>
-            </button>
-
-          </div>
-
-          <a
-            href="/CV/Prom Sereyreaksa-CV.pdf"
-            download="Prom-Sereyreaksa-CV.pdf"
-            className="inline-flex items-center gap-2 text-xs tracking-[0.16em] text-zinc-600 hover:text-zinc-900 transition-colors animate-fadeInUp-4"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>DOWNLOAD CV</span>
-          </a>
         </div>
 
-        <div className="animate-fadeInLeft">
-          <div className="relative mx-auto w-[320px] md:w-[384px] lg:w-[448px]">
-            <div className="absolute -inset-10 bg-gradient-to-br from-blue-100/40 to-zinc-300/20 -z-10 blur-2xl" aria-hidden="true" />
+        {/* Image block — scales with vw so it shrinks smoothly */}
+        <div className="animate-fadeInLeft w-full flex justify-center md:justify-end self-center mt-6 md:mt-0">
+          <div
+            className="relative shrink-0 w-full"
+            style={{ maxWidth: 'clamp(300px, 36vw, 520px)' }}
+          >
+            <div
+              className="absolute -inset-10 bg-gradient-to-br from-blue-100/40 to-zinc-300/20 -z-10 blur-2xl"
+              aria-hidden="true"
+            />
             <div className="relative bg-white rounded-2xl overflow-hidden">
-              <div className="aspect-square">
+              <div className="aspect-square w-full">
                 <OptimizedProfileImage />
               </div>
-              <div className="px-4 md:px-6 py-4 flex items-center justify-between text-[11px] tracking-[0.14em] text-zinc-600">
+              <div className="px-4 md:px-6 py-4 flex items-center text-[11px] tracking-[0.14em] text-zinc-600">
                 <span>PHNOM PENH</span>
-                <span>OPEN TO INTERNSHIPS & FREELANCE</span>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
 });
 
 LandingSection.displayName = 'LandingSection';
-
 export default LandingSection;

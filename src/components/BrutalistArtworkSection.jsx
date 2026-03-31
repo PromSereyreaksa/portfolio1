@@ -27,12 +27,11 @@ const BrutalistArtworkSection = memo(() => {
         
         {/* Section Title */}
         <ScrollAnimationWrapper animation="fadeInUp" delay={200}>
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-zinc-500 mb-3">CREATIVE PORTFOLIO</p>
+          <div className="text-left mb-16">
             <h2 className="display-hero text-zinc-950 mb-6 max-w-full">
               VISUAL WORK
             </h2>
-            <p className="text-sm md:text-base text-zinc-700 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-zinc-700 max-w-2xl leading-relaxed">
               A collection of visual designs, illustrations, and creative expressions 
               spanning various mediums and styles.
             </p>

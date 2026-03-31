@@ -1,6 +1,6 @@
-﻿import { memo } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { memo } from 'react';
 import ScrollAnimationWrapper from './ScrollAnimationWrapper';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import {
   SiExpress,
   SiFigma,
@@ -66,102 +66,93 @@ const experience = [
 ];
 
 const AboutSection = memo(() => {
+  const [introRef, introVisible] = useScrollAnimation({
+    threshold: 0.3,
+    delay: 80,
+    triggerOnce: true
+  });
+
   return (
-    <section className="hero-surface section-shell px-6 md:px-12 lg:px-20">
+    <section id="about" className="hero-surface section-shell px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
         <ScrollAnimationWrapper animation="fadeInUp" delay={80}>
-          <header className="text-center mb-12 md:mb-14">
-            <p className="text-xs tracking-[0.22em] text-zinc-500 mb-3">ABOUT</p>
-            <h2 className="display-hero text-zinc-950 mb-6">ABOUT ME</h2>
-            <div className="w-full text-left space-y-4">
-              <p className="text-md text-zinc-700 leading-relaxed">
-                I am an ambitious, motivated, and curious Computer Science student with an entrepreneurial mindset and a passion
-                for solving real-world problems. Analytical and proactive, I bring experience in teamwork, leadership, volunteering,
-                and project delivery. I thrive on learning, collaboration, and taking initiative, consistently seeking to create
-                meaningful impact in every endeavor.
-              </p>
-              <p className="text-md text-zinc-700 leading-relaxed">
-                I have been building for 3+ years and shipped 6 products. My core focus is applying theory into practical real-world
-                systems, and I am currently based in Phnom Penh.
-              </p>
-              <p className="text-md text-zinc-600 leading-relaxed italic">
-                Fullstack developer focused on security, product quality, and practical impact.
-              </p>
+          <header id="about" className="mb-44 md:mb-52 lg:mb-60">
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
+              <div className="space-y-4">
+                <h2 className="display-hero text-zinc-950 max-w-[11ch]">ABOUT ME</h2>
+                <p className="text-sm md:text-base leading-relaxed text-zinc-500 max-w-sm">
+                  Building software that feels clear, useful, and properly finished.
+                </p>
+                <div className="flex flex-wrap gap-x-6 gap-y-2 pt-3">
+                  <span className="about-stat-inline">3+ years building</span>
+                  <span className="about-stat-inline">6 products shipped</span>
+                  <span className="about-stat-inline">Based in Phnom Penh</span>
+                </div>
+              </div>
+
+              <div ref={introRef} className="w-full text-left space-y-5 lg:pt-2">
+                <p className={`about-fill-text text-lg md:text-[1.45rem] leading-[1.65] ${introVisible ? 'is-revealed' : ''}`}>
+                  I&apos;m a software developer and Computer Science student focused on building practical digital products with clear UX and strong execution. I work across product thinking, frontend development, and technical problem-solving to turn ideas into real, usable systems.
+                </p>
+                <p className={`about-fill-text text-lg md:text-[1.45rem] leading-[1.65] ${introVisible ? 'is-revealed' : ''}`}>
+                  Over the last 3+ years, I&apos;ve shipped multiple products, led teams, taught students, and worked on projects across software, design, and security. I&apos;m especially interested in tools that solve real problems and feel simple, useful, and well-crafted.
+                </p>
+                <div className="pt-3 space-y-4">
+                  <div>
+                    <h3 className="text-base md:text-lg font-medium text-zinc-900">
+                      Bachelor of Computer Science in Software Engineering
+                    </h3>
+                    <p className="text-sm text-zinc-700">Cambodia Academy of Digital Technology (CADT)</p>
+                    <p className="text-sm text-zinc-500">2024 - 2027</p>
+                  </div>
+                  <div>
+                    <h3 className="text-base md:text-lg font-medium text-zinc-900">
+                      Bachelor of Education (B.Ed) in TEFL
+                    </h3>
+                    <p className="text-sm text-zinc-700">Institution of Foreign Languages (IFL)</p>
+                    <p className="text-sm text-zinc-500">2024 - 2027</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </header>
         </ScrollAnimationWrapper>
 
-        <ScrollAnimationWrapper animation="fadeInUp" delay={160}>
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-10 mb-14 md:mb-16">
-            <article className="p-5 md:p-7 bg-white rounded-2xl">
-              <p className="text-xs tracking-[0.18em] text-zinc-500 mb-3">CURRENT FOCUS</p>
-              <h3 className="display-brutal text-zinc-900 mb-3">LeakScope</h3>
-              <p className="text-sm md:text-base text-zinc-700 leading-relaxed mb-5">
-                I am currently building LeakScope, a security-focused platform for practical real-world systems.
-                The goal is to ship useful tools with clear UX and strong execution quality.
-              </p>
-              <a
-                href="https://leakscope.tech/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm tracking-[0.1em] text-blue-700 hover:text-blue-900 transition-colors"
-              >
-                <span>VISIT LEAKSCOPE</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </article>
-
-            <article className="p-5 md:p-7 bg-zinc-50 rounded-2xl">
-              <p className="text-xs tracking-[0.18em] text-zinc-500 mb-3">EDUCATION</p>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-base md:text-lg font-medium text-zinc-900">
-                    Bachelor of Computer Science in Software Engineering
-                  </h3>
-                  <p className="text-sm text-zinc-700">Cambodia Academy of Digital Technology (CADT)</p>
-                  <p className="text-sm text-zinc-700">2024 - 2027</p>
-                </div>
-                <div className="pt-4">
-                  <h3 className="text-base md:text-lg font-medium text-zinc-900">
-                    Bachelor of Education (B.Ed) in TEFL
-                  </h3>
-                  <p className="text-sm text-zinc-700">Institution of Foreign Languages (IFL)</p>
-                  <p className="text-sm text-zinc-700">2024 - 2027</p>
-                </div>
-              </div>
-            </article>
-          </div>
-        </ScrollAnimationWrapper>
-
         <ScrollAnimationWrapper animation="fadeInUp" delay={220}>
-          <section className="mb-14 md:mb-16">
-            <div className="mb-6">
+          <section id="experience" className="mt-28 md:mt-36 lg:mt-40 mb-14 md:mb-16">
+            <div className="mb-10 md:mb-12">
               <p className="text-xs tracking-[0.18em] text-zinc-500 mb-2">PROFESSIONAL JOURNEY</p>
-              <h3 className="display-brutal text-zinc-950">Experience Highlights</h3>
+              <h3 className="display-brutal text-zinc-950 mb-3">Experience Highlights</h3>
+              <p className="text-sm md:text-base text-zinc-600 max-w-2xl leading-relaxed">
+                Leadership, teaching, product building, and creative support across startups, hackathons, and community programs.
+              </p>
             </div>
 
-            <div className="space-y-5">
+            <div className="experience-timeline">
               {experience.map((item) => (
-                <article key={`${item.title}-${item.organization}`} className="bg-white rounded-2xl p-5 md:p-6">
-                  <div className="grid md:grid-cols-[1fr_220px] gap-5 md:gap-6 items-start">
-                    <div>
-                      <div className="mb-3">
-                        <p className="text-[11px] tracking-[0.16em] text-zinc-500 mb-1">{item.organization}</p>
-                        <h4 className="text-lg md:text-xl font-medium text-zinc-900">{item.title}</h4>
-                        <p className="text-xs tracking-[0.12em] text-zinc-500 mt-1">{item.time}</p>
+                <article key={`${item.title}-${item.organization}`} className="experience-entry">
+                  <div className="experience-marker" aria-hidden="true" />
+                  <div className="experience-date">{item.time}</div>
+
+                  <div className="experience-card">
+                    <div className="grid md:grid-cols-[1fr_220px] gap-6 md:gap-8 items-start">
+                      <div>
+                        <div className="mb-4 md:min-h-[1.5rem]">
+                          <p className="text-[11px] tracking-[0.16em] text-zinc-500 mb-1.5">{item.organization}</p>
+                          <h4 className="text-xl md:text-2xl font-medium tracking-[-0.02em] text-zinc-950">{item.title}</h4>
+                        </div>
+
+                        <ul className="space-y-3 text-sm md:text-[0.97rem] text-zinc-700 leading-relaxed">
+                          {item.details.map((line) => (
+                            <li key={line} className="experience-detail">
+                              <span className="experience-detail-dot" aria-hidden="true" />
+                              <span>{line}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
 
-                      <ul className="space-y-2.5 text-sm text-zinc-700 leading-relaxed">
-                        {item.details.map((line) => (
-                          <li key={line} className="flex gap-2">
-                            <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-zinc-400 flex-shrink-0" aria-hidden="true" />
-                            <span>{line}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="bg-zinc-50 rounded-xl overflow-hidden">
+                      <div className="experience-media">
                       <img
                         src={item.image}
                         alt={`${item.organization} visual`}
@@ -169,6 +160,7 @@ const AboutSection = memo(() => {
                         loading="lazy"
                         decoding="async"
                       />
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -231,7 +223,3 @@ const AboutSection = memo(() => {
 AboutSection.displayName = 'AboutSection';
 
 export default AboutSection;
-
-
-
-

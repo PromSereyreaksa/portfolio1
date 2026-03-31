@@ -13,7 +13,7 @@ const featuredProject = {
     'Security issues in Supabase deployments are often exposed through public assets and config drift, but teams rarely have continuous external checks.',
   solution:
     'Built a scanner pipeline that inspects live surfaces without credentials, validates RLS and auth patterns, and reports exploitable findings with remediation context.',
-  impact: ['1,450+ applications scanned', '9,900+ vulnerabilities identified'],
+  impact: ['1,700+ applications scanned', '12,000+ vulnerabilities identified'],
   stack: ['Supabase', 'Security Testing', 'RLS', 'JWT', 'Automation', 'React']
 };
 
@@ -62,9 +62,7 @@ const ProjectsSection = memo(() => {
       <div className="relative max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 md:gap-10 items-end mb-12 md:mb-16">
           <div className="text-left">
-            <p className="text-xs tracking-[0.22em] text-zinc-500 mb-3">SELECTED WORK</p>
-            <h2 className="display-hero text-zinc-950 mb-3">PROJECTS</h2>
-            <p className="display-brutal text-zinc-300 leading-[0.9]">BUILD DESIGN SHIP</p>
+            <h2 className="display-hero text-zinc-950 mb-3">Recent Projects</h2>
           </div>
           <p className="text-sm md:text-base leading-relaxed text-zinc-700 max-w-2xl">
             Projects where I owned outcomes end-to-end: product direction, implementation quality, and real-world impact.
@@ -218,7 +216,4 @@ const ProjectsSection = memo(() => {
 ProjectsSection.displayName = 'ProjectsSection';
 
 export default ProjectsSection;
-
-
-
 

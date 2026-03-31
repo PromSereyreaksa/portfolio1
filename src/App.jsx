@@ -130,7 +130,7 @@ function PortfolioPage() {
           <div className="animate-pulse text-gray-500">Loading...</div>
         </div>
       }>
-        <div id="about" className="section-anchor">
+        <div className="section-anchor">
           <AboutSection />
         </div>
         <div id="projects" className="section-anchor">

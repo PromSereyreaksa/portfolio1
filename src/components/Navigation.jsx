@@ -1,10 +1,11 @@
-﻿import { Menu, X } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const SECTION_LINKS = [
   { id: 'landing', label: 'HOME' },
   { id: 'about', label: 'ABOUT' },
+  { id: 'experience', label: 'EXPERIENCE' },
   { id: 'projects', label: 'PROJECTS' },
   { id: 'visual-work', label: 'VISUAL WORK' },
   { id: 'contact', label: 'CONTACT' }
@@ -14,6 +15,8 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState('landing');
+  const [pillStyle, setPillStyle] = useState({ opacity: 0, width: 0, x: 0 });
+  const itemRefs = useRef({});
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -45,30 +48,67 @@ export default function Navigation() {
   useEffect(() => {
     if (!isPortfolioPage) return undefined;
 
-    const sections = SECTION_LINKS.map((section) => document.getElementById(section.id)).filter(Boolean);
-    if (sections.length === 0) return undefined;
+    const updateActiveSection = () => {
+      const sections = SECTION_LINKS.map((section) => document.getElementById(section.id)).filter(Boolean);
+      if (sections.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      const activationOffset = 180;
+      const nextSectionOffset = 220;
+      const scrollProbe = window.scrollY;
+      let currentSection = sections[0].id;
 
-        if (visibleEntries.length > 0) {
-          const sectionId = visibleEntries[0].target.id;
-          setActiveItem(sectionId);
+      for (let index = 0; index < sections.length; index += 1) {
+        const current = sections[index];
+        const next = sections[index + 1];
+        const currentTop = window.scrollY + current.getBoundingClientRect().top;
+        const nextTop = next ? window.scrollY + next.getBoundingClientRect().top : Number.POSITIVE_INFINITY;
+        const boundary = next ? nextTop - nextSectionOffset : Number.POSITIVE_INFINITY;
+
+        if (scrollProbe >= currentTop - activationOffset && scrollProbe < boundary) {
+          currentSection = current.id;
+          break;
         }
-      },
-      {
-        rootMargin: '-36% 0px -48% 0px',
-        threshold: [0.1, 0.25, 0.5, 0.75]
+
+        if (scrollProbe >= currentTop - activationOffset) {
+          currentSection = current.id;
+        }
       }
-    );
 
-    sections.forEach((section) => observer.observe(section));
+      setActiveItem(currentSection);
+    };
 
-    return () => observer.disconnect();
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+    window.addEventListener('hashchange', updateActiveSection);
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+      window.removeEventListener('hashchange', updateActiveSection);
+    };
   }, [isPortfolioPage]);
+
+  useLayoutEffect(() => {
+    const activeElement = itemRefs.current[activeItem];
+    if (!activeElement) {
+      setPillStyle((current) => ({ ...current, opacity: 0 }));
+      return;
+    }
+
+    const updatePill = () => {
+      const { offsetLeft, offsetWidth } = activeElement;
+      setPillStyle({
+        opacity: 1,
+        width: offsetWidth,
+        x: offsetLeft
+      });
+    };
+
+    updatePill();
+    window.addEventListener('resize', updatePill);
+    return () => window.removeEventListener('resize', updatePill);
+  }, [activeItem, navLinks]);
 
   const scrollToSection = (sectionId) => {
     const scrollToTarget = () => {
@@ -76,7 +116,9 @@ export default function Navigation() {
       if (!element) return false;
 
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      window.history.pushState(null, '', `#${sectionId}`);
+      if (window.location.hash) {
+        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      }
       setActiveItem(sectionId);
       return true;
     };
@@ -104,85 +146,108 @@ export default function Navigation() {
     window.requestAnimationFrame(tryScroll);
   };
 
-  const itemClass = (isActive) =>
-    `group relative text-xs md:text-sm tracking-[0.18em] transition-colors px-1 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-      isActive ? 'text-black' : 'text-zinc-600 hover:text-black'
+  const desktopItemClass = (isActive) =>
+    `relative z-10 inline-flex items-center rounded-full text-[11px] lg:text-xs tracking-[0.13em] transition-colors duration-300 px-2.5 lg:px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+      isActive ? 'text-white' : 'text-zinc-600 hover:text-black'
     }`;
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/96'
-          : 'bg-white/78 backdrop-blur-md'
+        scrolled ? 'pt-3' : 'pt-5'
       }`}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
+        <div
+          className={`w-full flex items-center justify-between h-14 pl-5 pr-2 md:pl-6 md:pr-3 rounded-full border transition-all duration-300 ${
+            scrolled
+              ? 'bg-white/96 border-zinc-200/80 shadow-[0_18px_40px_-28px_rgba(0,0,0,0.28)] backdrop-blur-xl'
+              : 'bg-white/82 border-white/70 backdrop-blur-xl shadow-[0_18px_40px_-32px_rgba(0,0,0,0.2)]'
+          }`}
+        >
+          {/* Logo / name */}
           <button
             type="button"
             onClick={() => scrollToSection('landing')}
-            className="text-sm md:text-base font-medium tracking-[0.24em] text-black hover:text-zinc-700 transition-colors cursor-pointer"
+            className="text-sm font-medium tracking-[0.22em] text-black hover:text-zinc-700 transition-colors cursor-pointer shrink-0"
             aria-label="Go to homepage section"
           >
             SEREY REAKSA
           </button>
 
-          <div className="hidden md:flex items-center gap-5 lg:gap-7">
-            {navLinks.map((link) => {
-              const isActive = activeItem === link.id;
-
-              return (
-                <button
-                  key={link.id}
-                  type="button"
-                  onClick={() => scrollToSection(link.id)}
-                  className={itemClass(isActive)}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute left-1 -bottom-[3px] h-[2px] bg-black transition-all duration-300 ${
-                      isActive ? 'w-[calc(100%-0.5rem)]' : 'w-0 group-hover:w-full'
-                    }`}
-                  />
-                </button>
-              );
-            })}
+          {/* Desktop nav */}
+          <div className="hidden lg:flex items-center ml-auto">
+            <div className="relative flex items-center gap-0.5 lg:gap-1 rounded-full p-1">
+              <span
+                aria-hidden="true"
+                className="absolute inset-y-1 rounded-full bg-zinc-950 shadow-[0_10px_24px_-18px_rgba(0,0,0,0.9)] transition-[transform,width,opacity] duration-300 ease-out"
+                style={{
+                  opacity: pillStyle.opacity,
+                  width: `${pillStyle.width}px`,
+                  transform: `translateX(${pillStyle.x}px)`
+                }}
+              />
+              {navLinks.map((link) => {
+                const isActive = activeItem === link.id;
+                return (
+                  <button
+                    key={link.id}
+                    ref={(node) => {
+                      itemRefs.current[link.id] = node;
+                    }}
+                    type="button"
+                    onClick={() => scrollToSection(link.id)}
+                    className={desktopItemClass(isActive)}
+                  >
+                    {link.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
+          {/* Mobile hamburger */}
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
-            className="md:hidden text-zinc-700 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md p-2 transition-colors"
+            className="lg:hidden ml-auto text-zinc-700 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md p-2 transition-colors"
             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
+        {/* FIX: Mobile menu — now properly styled with rounded card,
+            backdrop blur, and shadow so it feels like part of the nav. */}
         <div
           id="mobile-menu"
-          className={`md:hidden transition-all duration-300 ease-out overflow-hidden ${
-            isOpen ? 'max-h-[28rem] opacity-100 pb-4' : 'max-h-0 opacity-0'
+          className={`lg:hidden transition-all duration-300 ease-out overflow-hidden ${
+            isOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="space-y-1 pt-3 bg-white/95">
+          <div
+            className={`mt-2 rounded-2xl border px-2 py-2 ${
+              scrolled
+                ? 'bg-white/96 border-zinc-200/80 shadow-[0_18px_40px_-28px_rgba(0,0,0,0.28)] backdrop-blur-xl'
+                : 'bg-white/90 border-white/70 backdrop-blur-xl shadow-[0_18px_40px_-32px_rgba(0,0,0,0.2)]'
+            }`}
+          >
             {navLinks.map((link) => {
               const isActive = activeItem === link.id;
-              const mobileBase = `block w-full text-left px-4 py-3 text-xs tracking-[0.2em] transition-colors rounded-md cursor-pointer ${
-                isActive ? 'bg-zinc-100 text-black' : 'text-zinc-600 hover:bg-zinc-100 hover:text-black'
-              }`;
-
               return (
                 <button
                   key={link.id}
                   type="button"
                   onClick={() => scrollToSection(link.id)}
-                  className={mobileBase}
+                  className={`block w-full text-left px-4 py-3 text-xs tracking-[0.2em] transition-colors rounded-xl cursor-pointer ${
+                    isActive
+                      ? 'bg-zinc-950 text-white'
+                      : 'text-zinc-600 hover:bg-zinc-100 hover:text-black'
+                  }`}
                 >
                   {link.label}
                 </button>
@@ -194,4 +259,3 @@ export default function Navigation() {
     </nav>
   );
 }
-
