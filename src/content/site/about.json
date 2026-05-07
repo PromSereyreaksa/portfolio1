@@ -1,0 +1,34 @@
+{
+  "eyebrow": "ABOUT ME",
+  "intro": "Building software that feels clear, useful, and properly finished.",
+  "stats": ["3+ years building", "6 products shipped", "Based in Phnom Penh"],
+  "paragraphs": [
+    "I'm a software developer and Computer Science student focused on building practical digital products with clear UX and strong execution. I work across product thinking, frontend development, and technical problem-solving to turn ideas into real, usable systems.",
+    "Over the last 3+ years, I've shipped multiple products, led teams, taught students, and worked on projects across software, design, and security. I'm especially interested in tools that solve real problems and feel simple, useful, and well-crafted."
+  ],
+  "experienceIntro": {
+    "eyebrow": "PROFESSIONAL JOURNEY",
+    "title": "Experience Highlights",
+    "description": "Leadership, teaching, product building, and creative support across startups, hackathons, and community programs."
+  },
+  "stackIntro": {
+    "eyebrow": "SKILLS & TECHNOLOGIES",
+    "title": "Technology Stack"
+  },
+  "stack": [
+    "Astro",
+    "React",
+    "JavaScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Tailwind CSS",
+    "Figma",
+    "Git",
+    "Python",
+    "Flutter",
+    "Java",
+    "Next.js",
+    "Three.js"
+  ]
+}

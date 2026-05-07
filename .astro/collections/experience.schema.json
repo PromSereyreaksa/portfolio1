@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "order": {
+      "type": "number"
+    },
+    "title": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "order",
+    "title",
+    "organization",
+    "time",
+    "image",
+    "details"
+  ]
+}

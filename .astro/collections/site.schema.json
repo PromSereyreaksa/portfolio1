@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "string"
+    },
+    "subheadline": {
+      "type": "string"
+    },
+    "subheadlinePrefix": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "companyIcon": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "rotatingPhrases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "intro": {
+      "type": "string"
+    },
+    "stats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "paragraphs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "experienceIntro": {
+      "type": "object",
+      "properties": {
+        "eyebrow": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "eyebrow",
+        "title",
+        "description"
+      ]
+    },
+    "stackIntro": {
+      "type": "object",
+      "properties": {
+        "eyebrow": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "eyebrow",
+        "title"
+      ]
+    },
+    "stack": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supportTitle": {
+      "type": "string"
+    },
+    "supportItems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "primaryCta": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "href"
+      ]
+    },
+    "secondaryCta": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "href"
+      ]
+    },
+    "footer": {
+      "type": "string"
+    },
+    "githubUrl": {
+      "type": "string"
+    },
+    "featured": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "productHuntLink": {
+          "type": "string"
+        },
+        "timeline": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "challenge": {
+          "type": "string"
+        },
+        "solution": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "subtitle",
+        "image",
+        "link",
+        "productHuntLink",
+        "timeline",
+        "role",
+        "challenge",
+        "solution",
+        "impact",
+        "stack"
+      ]
+    },
+    "$schema": {
+      "type": "string"
+    }
+  }
+}

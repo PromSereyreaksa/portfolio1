@@ -1,13 +1,5 @@
 {
-  "rewrites": [
-    { "source": "/about", "destination": "/#about" },
-    { "source": "/projects", "destination": "/#projects" },
-    { "source": "/visual-work", "destination": "/#visual-work" },
-    { "source": "/contact", "destination": "/#contact" },
-    { "source": "/blog", "destination": "/index.html" },
-    { "source": "/blog/:slug", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
+  "rewrites": [],
   "headers": [
     {
       "source": "/(.*)",

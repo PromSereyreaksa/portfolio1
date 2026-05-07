@@ -1,8 +1,9 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 const OptimizedProfileImage = memo(({ className = '' }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const imageRef = useRef(null);
 
   const handleImageLoad = useCallback(() => {
     setImageLoaded(true);
@@ -10,6 +11,17 @@ const OptimizedProfileImage = memo(({ className = '' }) => {
 
   const handleImageError = useCallback(() => {
     setImageError(true);
+  }, []);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    if (!image) return;
+
+    // In Astro islands the image may finish loading before hydration
+    // attaches React event handlers, so detect that case manually.
+    if (image.complete && image.naturalWidth > 0) {
+      setImageLoaded(true);
+    }
   }, []);
 
   return (
@@ -42,6 +54,7 @@ const OptimizedProfileImage = memo(({ className = '' }) => {
             
             {/* JPEG fallback */}
             <img
+              ref={imageRef}
               src="/profile.jpg"
               alt="Prom Sereyreaksa - Creative Technologist and Software Engineer"
               width="448"

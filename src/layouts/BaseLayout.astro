@@ -1,0 +1,50 @@
+---
+import '../index.css';
+import '../App.css';
+
+const {
+  title = 'Prom Sereyreaksa - Creative Technologist & Software Engineer',
+  description = 'Portfolio of Prom Sereyreaksa.',
+  canonical = 'https://promsereyreaksa.dev/',
+  ogTitle = title,
+  ogDescription = description,
+  ogImage = 'https://promsereyreaksa.dev/profile.jpg',
+  ogType = 'website',
+  robots = 'index, follow',
+  keywords = 'Prom Sereyreaksa, Creative Technologist, Software Engineer Cambodia, Web Developer, Portfolio, UI UX Designer',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Prom Sereyreaksa" />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Prom Sereyreaksa" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

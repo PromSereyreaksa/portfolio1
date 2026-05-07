@@ -1,6 +1,5 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 const SECTION_LINKS = [
   { id: 'landing', label: 'HOME' },
@@ -8,7 +7,7 @@ const SECTION_LINKS = [
   { id: 'experience', label: 'EXPERIENCE' },
   { id: 'projects', label: 'PROJECTS' },
   { id: 'visual-work', label: 'VISUAL WORK' },
-  { id: 'contact', label: 'CONTACT' }
+  { id: 'contact', label: 'CONTACT' },
 ];
 
 export default function Navigation() {
@@ -17,10 +16,6 @@ export default function Navigation() {
   const [activeItem, setActiveItem] = useState('landing');
   const [pillStyle, setPillStyle] = useState({ opacity: 0, width: 0, x: 0 });
   const itemRefs = useRef({});
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const isPortfolioPage = location.pathname === '/';
   const navLinks = useMemo(() => SECTION_LINKS, []);
 
   useEffect(() => {
@@ -34,20 +29,11 @@ export default function Navigation() {
   }, []);
 
   useEffect(() => {
-    setIsOpen(false);
-
-    if (!isPortfolioPage) {
-      setActiveItem('');
-      return;
-    }
-
     const currentHash = window.location.hash?.replace('#', '');
     setActiveItem(currentHash || 'landing');
-  }, [isPortfolioPage, location.pathname]);
+  }, []);
 
   useEffect(() => {
-    if (!isPortfolioPage) return undefined;
-
     const updateActiveSection = () => {
       const sections = SECTION_LINKS.map((section) => document.getElementById(section.id)).filter(Boolean);
       if (sections.length === 0) return;
@@ -87,7 +73,7 @@ export default function Navigation() {
       window.removeEventListener('resize', updateActiveSection);
       window.removeEventListener('hashchange', updateActiveSection);
     };
-  }, [isPortfolioPage]);
+  }, []);
 
   useLayoutEffect(() => {
     const activeElement = itemRefs.current[activeItem];
@@ -101,7 +87,7 @@ export default function Navigation() {
       setPillStyle({
         opacity: 1,
         width: offsetWidth,
-        x: offsetLeft
+        x: offsetLeft,
       });
     };
 
@@ -111,39 +97,13 @@ export default function Navigation() {
   }, [activeItem, navLinks]);
 
   const scrollToSection = (sectionId) => {
-    const scrollToTarget = () => {
-      const element = document.getElementById(sectionId);
-      if (!element) return false;
+    const element = document.getElementById(sectionId);
+    if (!element) return;
 
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (window.location.hash) {
-        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-      }
-      setActiveItem(sectionId);
-      return true;
-    };
-
-    if (isPortfolioPage) {
-      scrollToTarget();
-      setIsOpen(false);
-      return;
-    }
-
-    navigate('/');
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.history.replaceState(null, '', sectionId === 'landing' ? '/' : `/#${sectionId}`);
+    setActiveItem(sectionId);
     setIsOpen(false);
-
-    let attempts = 0;
-    const maxAttempts = 24;
-
-    const tryScroll = () => {
-      const didScroll = scrollToTarget();
-      attempts += 1;
-      if (!didScroll && attempts < maxAttempts) {
-        window.requestAnimationFrame(tryScroll);
-      }
-    };
-
-    window.requestAnimationFrame(tryScroll);
   };
 
   const desktopItemClass = (isActive) =>
@@ -167,7 +127,6 @@ export default function Navigation() {
               : 'bg-white/82 border-white/70 backdrop-blur-xl shadow-[0_18px_40px_-32px_rgba(0,0,0,0.2)]'
           }`}
         >
-          {/* Logo / name */}
           <button
             type="button"
             onClick={() => scrollToSection('landing')}
@@ -177,7 +136,6 @@ export default function Navigation() {
             SEREY REAKSA
           </button>
 
-          {/* Desktop nav */}
           <div className="hidden lg:flex items-center ml-auto">
             <div className="relative flex items-center gap-0.5 lg:gap-1 rounded-full p-1">
               <span
@@ -186,7 +144,7 @@ export default function Navigation() {
                 style={{
                   opacity: pillStyle.opacity,
                   width: `${pillStyle.width}px`,
-                  transform: `translateX(${pillStyle.x}px)`
+                  transform: `translateX(${pillStyle.x}px)`,
                 }}
               />
               {navLinks.map((link) => {
@@ -208,7 +166,6 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Mobile hamburger */}
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
@@ -221,8 +178,6 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* FIX: Mobile menu — now properly styled with rounded card,
-            backdrop blur, and shadow so it feels like part of the nav. */}
         <div
           id="mobile-menu"
           className={`lg:hidden transition-all duration-300 ease-out overflow-hidden ${

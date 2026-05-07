@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "order": {
+      "type": "number"
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "timeline": {
+      "type": "string"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "challenge": {
+      "type": "string"
+    },
+    "solution": {
+      "type": "string"
+    },
+    "impact": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "secondaryLink": {
+      "type": "string"
+    },
+    "secondaryLabel": {
+      "type": "string"
+    },
+    "stack": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "link": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "order",
+    "title",
+    "summary",
+    "role",
+    "timeline",
+    "outcome",
+    "image",
+    "stack",
+    "link"
+  ]
+}

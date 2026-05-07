@@ -1,0 +1,20 @@
+{
+  "eyebrow": "CONTACT",
+  "title": "LET'S BUILD SOMETHING STRONG",
+  "description": "Open to internships, freelance projects, collaborations, and product conversations. I usually respond within 24 hours.",
+  "supportTitle": "Product + Engineering Support",
+  "supportItems": [
+    "Frontend architecture with clear UX hierarchy",
+    "Backend integration and API quality improvements",
+    "MVP delivery from concept to production"
+  ],
+  "primaryCta": {
+    "label": "START A CONVERSATION",
+    "href": "mailto:prumsereyreaksa@gmail.com"
+  },
+  "secondaryCta": {
+    "label": "QUICK CHAT ON TELEGRAM",
+    "href": "https://t.me/souuJ"
+  },
+  "footer": "© 2026 Prom Sereyreaksa."
+}
