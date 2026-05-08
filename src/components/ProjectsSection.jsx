@@ -1,10 +1,8 @@
-import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, Github } from 'lucide-react';
 
 const ProjectsSection = memo(({ section, projects }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isImmersed, setIsImmersed] = useState(false);
-  const sectionRef = useRef(null);
 
   const projectDeck = useMemo(
     () =>
@@ -34,33 +32,12 @@ const ProjectsSection = memo(({ section, projects }) => {
     [activeIndex, projectDeck]
   );
 
-  useEffect(() => {
-    const sectionNode = sectionRef.current;
-    if (!sectionNode) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsImmersed(entry.isIntersecting);
-      },
-      {
-        threshold: 0.32,
-        rootMargin: '-12% 0px -12% 0px',
-      }
-    );
-
-    observer.observe(sectionNode);
-    return () => observer.disconnect();
-  }, []);
-
   const stepProject = (direction) => {
     setActiveIndex((current) => (current + direction + projectDeck.length) % projectDeck.length);
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className={`projects-cinematic section-shell w-full px-0 md:px-0 lg:px-0 ${isImmersed ? 'is-immersed' : ''}`}
-    >
+    <section className="projects-cinematic section-shell w-full px-0 md:px-0 lg:px-0">
       <div className="projects-cinematic-shell">
         <div className="projects-cinematic-grid">
           <div className="projects-copy-panel">

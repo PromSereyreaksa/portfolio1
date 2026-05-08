@@ -1,15 +1,31 @@
 ---
-import RedirectLayout from '../layouts/RedirectLayout.astro';
+import PortfolioApp from '../components/PortfolioApp.jsx';
+import { loadPortfolioContent } from '../lib/portfolioContent.js';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const { siteData, experience, education, projects, artwork, contactMethods } =
+  await loadPortfolioContent();
 ---
 
-<RedirectLayout
+<BaseLayout
   title="Projects - Prom Sereyreaksa | Software Engineer Portfolio"
   description="Explore React projects, web applications, and software engineering work by Prom Sereyreaksa. View innovative projects including AUREA, Phsar Design, StockMate, and Automata Visualizer."
   canonical="https://promsereyreaksa.dev/projects"
   keywords="Prom Sereyreaksa Projects, React Projects, Software Engineer Portfolio, Web Development Cambodia, AUREA, Phsar Design, StockMate, Automata"
   ogDescription="Explore React projects, web applications, and software engineering work by Prom Sereyreaksa including innovative applications and digital solutions."
-  redirectTo="https://promsereyreaksa.dev/#projects"
-  heading="Projects by Prom Sereyreaksa"
-  body="Software engineering projects including React applications, web development, and digital solutions."
-  linkLabel="View Projects Section"
-/>
+>
+  <PortfolioApp
+    client:load
+    initialSection="projects"
+    hero={siteData.hero}
+    about={siteData.about}
+    education={education}
+    experience={experience}
+    projectsSection={siteData['projects-section']}
+    projects={projects}
+    artworkSection={siteData['artwork-section']}
+    artwork={artwork}
+    contact={siteData.contact}
+    contactMethods={contactMethods}
+  />
+</BaseLayout>

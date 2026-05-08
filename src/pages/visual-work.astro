@@ -1,15 +1,31 @@
 ---
-import RedirectLayout from '../layouts/RedirectLayout.astro';
+import PortfolioApp from '../components/PortfolioApp.jsx';
+import { loadPortfolioContent } from '../lib/portfolioContent.js';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const { siteData, experience, education, projects, artwork, contactMethods } =
+  await loadPortfolioContent();
 ---
 
-<RedirectLayout
+<BaseLayout
   title="Visual Work - Prom Sereyreaksa | Graphic Designer"
   description="Discover graphic design work, digital art, and visual creations by Prom Sereyreaksa. Creative visual designs, UI/UX work, and artistic projects showcasing design expertise."
   canonical="https://promsereyreaksa.dev/visual-work"
   keywords="Prom Sereyreaksa Visual Work, Graphic Design Cambodia, Digital Art Portfolio, UI/UX Design, Creative Visual Design, Artistic Projects"
   ogDescription="Discover graphic design work, digital art, and visual creations by Prom Sereyreaksa showcasing creative design expertise."
-  redirectTo="https://promsereyreaksa.dev/#visual-work"
-  heading="Visual Work by Prom Sereyreaksa"
-  body="Graphic design, digital art, and creative visual projects."
-  linkLabel="View Visual Work Section"
-/>
+>
+  <PortfolioApp
+    client:load
+    initialSection="visual-work"
+    hero={siteData.hero}
+    about={siteData.about}
+    education={education}
+    experience={experience}
+    projectsSection={siteData['projects-section']}
+    projects={projects}
+    artworkSection={siteData['artwork-section']}
+    artwork={artwork}
+    contact={siteData.contact}
+    contactMethods={contactMethods}
+  />
+</BaseLayout>

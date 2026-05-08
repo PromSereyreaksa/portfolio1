@@ -8,6 +8,7 @@ const ContactSection = lazy(() => import('./ContactSection.jsx'));
 const ProjectsSection = lazy(() => import('./ProjectsSection.jsx'));
 
 export default function PortfolioApp({
+  initialSection = 'landing',
   hero,
   about,
   education,
@@ -22,28 +23,40 @@ export default function PortfolioApp({
   useEffect(() => {
     const titles = {
       about: 'About - Prom Sereyreaksa | Creative Technologist',
+      experience: 'About - Prom Sereyreaksa | Creative Technologist',
       projects: 'Projects - Prom Sereyreaksa | Software Engineer Portfolio',
       'visual-work': 'Visual Work - Prom Sereyreaksa | Graphic Designer',
       contact: 'Contact - Prom Sereyreaksa | Get In Touch',
     };
 
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      const target = hash ? document.getElementById(hash) : null;
-
-      document.title =
-        titles[hash] || 'Prom Sereyreaksa - Creative Technologist & Software Engineer';
-
+    const scrollToSection = (sectionId) => {
+      const target = sectionId ? document.getElementById(sectionId) : null;
       if (!target) return;
+
       window.setTimeout(() => {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
+      }, 120);
+    };
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      const resolvedSection = hash || initialSection;
+
+      document.title =
+        titles[resolvedSection] || 'Prom Sereyreaksa - Creative Technologist & Software Engineer';
+
+      if (hash) {
+        scrollToSection(hash);
+      }
     };
 
     handleHashChange();
+    if (!window.location.hash && initialSection && initialSection !== 'landing') {
+      scrollToSection(initialSection);
+    }
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [initialSection]);
 
   return (
     <div className="App">

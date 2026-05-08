@@ -10,6 +10,15 @@ const SECTION_LINKS = [
   { id: 'contact', label: 'CONTACT' },
 ];
 
+const SECTION_URLS = {
+  landing: '/',
+  about: '/about',
+  experience: '/about#experience',
+  projects: '/projects',
+  'visual-work': '/visual-work',
+  contact: '/contact',
+};
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +39,34 @@ export default function Navigation() {
 
   useEffect(() => {
     const currentHash = window.location.hash?.replace('#', '');
-    setActiveItem(currentHash || 'landing');
+    const currentPath = window.location.pathname;
+
+    if (currentHash) {
+      setActiveItem(currentHash);
+      return;
+    }
+
+    if (currentPath === '/about') {
+      setActiveItem('about');
+      return;
+    }
+
+    if (currentPath === '/projects') {
+      setActiveItem('projects');
+      return;
+    }
+
+    if (currentPath === '/visual-work') {
+      setActiveItem('visual-work');
+      return;
+    }
+
+    if (currentPath === '/contact') {
+      setActiveItem('contact');
+      return;
+    }
+
+    setActiveItem('landing');
   }, []);
 
   useEffect(() => {
@@ -101,7 +137,7 @@ export default function Navigation() {
     if (!element) return;
 
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.history.replaceState(null, '', sectionId === 'landing' ? '/' : `/#${sectionId}`);
+    window.history.replaceState(null, '', SECTION_URLS[sectionId] || `/#${sectionId}`);
     setActiveItem(sectionId);
     setIsOpen(false);
   };
