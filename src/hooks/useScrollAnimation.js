@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 export const useScrollAnimation = (options = {}) => {
   const elementRef = useRef(null);
   const [isVisible, setIsVisible] = useState(() => {
-    if (typeof window === 'undefined') return false;
+    // Keep content visible in SSR/no-JS scenarios so the page never renders blank.
+    if (typeof window === 'undefined') return true;
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
   const [hasAnimated, setHasAnimated] = useState(false);
