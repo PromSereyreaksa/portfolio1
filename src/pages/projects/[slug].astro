@@ -1,0 +1,80 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const project = entry.data;
+---
+
+<SiteLayout
+  title={`${project.title} | Prom Sereyreaksa`}
+  description={project.summary}
+  canonical={`https://promsereyreaksa.dev/projects/${project.slug}`}
+  currentPath="/projects"
+>
+  <section class="page-header shell">
+    <div data-reveal>
+      <p class="eyebrow">Case Study</p>
+      <h1 class="page-title">{project.title}</h1>
+      <p class="article-lead">{project.summary}</p>
+      <div class="inline-links">
+        {project.link ? (
+          <a class="button button--primary" href={project.link} target="_blank" rel="noreferrer">
+            Live Demo
+          </a>
+        ) : null}
+        {project.github ? (
+          <a class="button" href={project.github} target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+        ) : null}
+        {project.secondaryLink ? (
+          <a class="button" href={project.secondaryLink} target="_blank" rel="noreferrer">
+            {project.secondaryLabel || 'Reference'}
+          </a>
+        ) : null}
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" data-reveal>
+    <img
+      class="case-study-image"
+      src={project.image}
+      alt={`${project.title} screenshot`}
+      loading="eager"
+      width="1600"
+      height="1000"
+    />
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell article-shell">
+    <article class="article-prose" data-reveal>
+      <Content />
+    </article>
+    <aside class="article-aside meta-panel" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <ul class="plain-list muted">
+        <li><strong style="color:var(--text);">Role</strong><br />{project.role}</li>
+        <li><strong style="color:var(--text);">Timeline</strong><br />{project.timeline}</li>
+        <li><strong style="color:var(--text);">Outcome</strong><br />{project.outcome}</li>
+      </ul>
+      <div class="tag-list" style="margin-top:1.25rem;">
+        {project.stack.map((item) => (
+          <span class="tag">{item}</span>
+        ))}
+      </div>
+    </aside>
+  </section>
+</SiteLayout>

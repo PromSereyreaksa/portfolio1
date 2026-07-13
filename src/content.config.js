@@ -91,19 +91,38 @@ const projectsCollection = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/projects' }),
   schema: z.object({
     order: z.number(),
+    slug: z.string(),
     title: z.string(),
     summary: z.string(),
     role: z.string(),
     timeline: z.string(),
+    year: z.string(),
     outcome: z.string(),
     image: z.string(),
     challenge: z.string().optional(),
     solution: z.string().optional(),
     impact: z.array(z.string()).optional(),
+    github: z.string().optional(),
     secondaryLink: z.string().optional(),
     secondaryLabel: z.string().optional(),
     stack: z.array(z.string()),
     link: z.string(),
+  }),
+});
+
+const writingCollection = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/writing' }),
+  schema: z.object({
+    order: z.number(),
+    slug: z.string(),
+    title: z.string(),
+    summary: z.string(),
+    date: z.preprocess(
+      (value) => (value instanceof Date ? value.toISOString().slice(0, 10) : value),
+      z.string()
+    ),
+    readTime: z.string(),
+    category: z.string(),
   }),
 });
 
@@ -133,6 +152,7 @@ export const collections = {
   experience: experienceCollection,
   education: educationCollection,
   projects: projectsCollection,
+  writing: writingCollection,
   artwork: artworkCollection,
   'contact-methods': contactMethodsCollection,
 };

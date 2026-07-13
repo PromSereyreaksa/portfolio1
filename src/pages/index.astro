@@ -1,24 +1,334 @@
 ---
-import PortfolioApp from '../components/PortfolioApp.jsx';
 import { loadPortfolioContent } from '../lib/portfolioContent.js';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import StackGrid from '../components/StackGrid.jsx';
+import ContactIcon from '../components/ContactIcon.jsx';
+import TechTags from '../components/TechTags.jsx';
 
-const { siteData, experience, education, projects, artwork, contactMethods } =
-  await loadPortfolioContent();
+const { siteData, projects, experience, education, contactMethods } = await loadPortfolioContent();
 ---
 
-<BaseLayout title={siteData.site.title} description={siteData.site.description}>
-  <PortfolioApp
-    client:load
-    hero={siteData.hero}
-    about={siteData.about}
-    education={education}
-    experience={experience}
-    projectsSection={siteData['projects-section']}
-    projects={projects}
-    artworkSection={siteData['artwork-section']}
-    artwork={artwork}
-    contact={siteData.contact}
-    contactMethods={contactMethods}
-  />
-</BaseLayout>
+<SiteLayout
+  title="Prom Sereyreaksa | Software Developer"
+  description="Portfolio of Prom Sereyreaksa, a software developer at Anagata building useful software and security-minded tools."
+  canonical="https://promsereyreaksa.dev/"
+  currentPath="/"
+>
+  <section class="page-header shell">
+    <div class="hero-block" data-reveal>
+      <h1 class="hero-title">Prom Sereyreaksa</h1>
+      <p class="hero-role">
+        <img src="/Anagata-Favicon-1.png" alt="Anagata logo" width="18" height="18" />
+        <span>Software Developer at Anagata.</span>
+      </p>
+      <p class="hero-copy">
+        A software developer and creative technologist student based in Phnom Penh, Cambodia.
+      </p>
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell about-section">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">About</p>
+    </div>
+    <div class="about-grid">
+      <div data-reveal>
+        <h2 class="section-title">{siteData.about.intro}</h2>
+      </div>
+      <div class="about-copy" data-reveal>
+        <p>
+          Prom Sereyreaksa is a Cambodian software engineering student and indie developer who
+          builds products around web development, cybersecurity, AI, and design systems. He focuses
+          on turning ideas into usable software and exploring entrepreneurship through technology.
+        </p>
+        <p>
+          He is currently part of <a href="https://sayanastudio.tech/">SAYANA</a>, a software and
+          web development studio based in Phnom Penh. SAYANA designs and builds full-stack web
+          applications, data systems, and automation tools for startups and businesses.
+        </p>
+        <p>
+          "The first time I touched code, I was modding a game and changing how it worked. That
+          feeling of opening a system, understanding it, and making it do something new has stayed
+          with me. It is why I am drawn to cybersecurity, why I build security-focused projects,
+          and why I spend my free time learning offensive security."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Education</p>
+    </div>
+    <div class="education-list">
+      {education.map((item) => (
+        <article class="education-row" data-reveal>
+          <span>{item.years}</span>
+          <div>
+            <h2>{item.degree}</h2>
+            <p>{item.school}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Projects</p>
+    </div>
+    <div class="project-list">
+      {projects.map((project) => (
+        <a class="project-row" href={`/projects/${project.slug}`} data-reveal>
+          <div>
+            <div class="article-meta">
+              <span>{project.year}</span>
+              <span>{project.role}</span>
+            </div>
+            <h2>{project.title}</h2>
+          </div>
+          <div>
+            <p>{project.summary}</p>
+            <TechTags stack={project.stack} max={8} />
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Experience</p>
+    </div>
+    <div class="article-list">
+      {experience.map((item) => (
+        <article class="article-row" data-reveal>
+          <div class="article-meta">
+            <span>{item.time}</span>
+          </div>
+          <h2>{item.title}</h2>
+          <p>{item.organization}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Tech Stack</p>
+    </div>
+    <div data-reveal>
+      <StackGrid stack={siteData.about.stack} />
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Contact</p>
+    </div>
+    <div class="contact-strip" data-reveal>
+      {contactMethods.map((method) => (
+        <a href={method.href} class="contact-item">
+          <span class="contact-icon"><ContactIcon name={method.icon} /></span>
+          <span>{method.label}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .hero-block {
+      max-width: 42rem;
+    }
+
+    .hero-title {
+      color: var(--text);
+      font-weight: 750;
+    }
+
+    .hero-role {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .hero-role img {
+      flex: 0 0 auto;
+    }
+
+    .company-line {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .company-line img {
+      flex: 0 0 auto;
+    }
+
+    .article-list {
+      display: grid;
+      gap: 1.15rem;
+    }
+
+    .about-grid,
+    .education-row {
+      display: grid;
+      grid-template-columns: minmax(12rem, 0.42fr) minmax(0, 0.58fr);
+      gap: 1rem 2rem;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 0.8rem;
+      color: var(--muted);
+    }
+
+    .about-copy p {
+      margin: 0;
+    }
+
+    .about-stats {
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .education-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .education-row {
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .education-row > span,
+    .education-row p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .education-row h2 {
+      font-size: 1.35rem;
+      font-weight: 550;
+      line-height: 1.15;
+    }
+
+    .project-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: minmax(12rem, 0.42fr) minmax(0, 0.58fr);
+      gap: 1rem 2rem;
+      min-width: 0;
+      padding: 1.35rem 0;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .article-row {
+      display: grid;
+      gap: 0.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+    }
+
+    .article-row h2 {
+      font-size: 1.55rem;
+      font-weight: 550;
+      line-height: 1.08;
+    }
+
+    .project-row h2 {
+      font-size: 1.55rem;
+      font-weight: 550;
+      line-height: 1.1;
+    }
+
+    .article-row p,
+    .project-row p {
+      margin: 0;
+      max-width: 44rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.25rem;
+      padding-top: 0.3rem;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .contact-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-icon :global(svg) {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (max-width: 760px) {
+      .about-grid,
+      .education-row {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+      }
+
+      .project-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .article-row h2,
+      .project-row h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</SiteLayout>

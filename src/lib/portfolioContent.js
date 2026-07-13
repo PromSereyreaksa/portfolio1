@@ -9,6 +9,9 @@ export async function loadPortfolioContent() {
   const experience = (await getCollection('experience')).sort(byOrder).map((entry) => entry.data);
   const education = (await getCollection('education')).sort(byOrder).map((entry) => entry.data);
   const projects = (await getCollection('projects')).sort(byOrder).map((entry) => entry.data);
+  const writing = (await getCollection('writing'))
+    .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+    .map((entry) => entry.data);
   const artwork = (await getCollection('artwork')).sort(byOrder).map((entry) => ({
     id: entry.data.order,
     ...entry.data,
@@ -22,6 +25,7 @@ export async function loadPortfolioContent() {
     experience,
     education,
     projects,
+    writing,
     artwork,
     contactMethods,
   };

@@ -1,0 +1,285 @@
+---
+import { loadPortfolioContent } from '../lib/portfolioContent.js';
+import SimpleLayout from '../layouts/SimpleLayout.astro';
+
+const { siteData, experience, projects, contactMethods } = await loadPortfolioContent();
+const highlights = [
+  'Computer Science student at CADT',
+  'Software Developer at Anagata',
+  'Building practical products with strong UX',
+];
+---
+
+<SimpleLayout
+  title="Engineer Portfolio | Prom Sereyreaksa"
+  description="Text-first engineering portfolio for Prom Sereyreaksa. Software engineering projects, experience, and contact details."
+  canonical="https://engineer.promsereyreaksa.dev/"
+  ogTitle="Engineer Portfolio | Prom Sereyreaksa"
+  ogDescription="Software engineering work, selected projects, and experience by Prom Sereyreaksa."
+>
+  <main class="engineer-shell">
+    <section class="hero">
+      <p class="eyebrow">Engineer Portfolio</p>
+      <div class="hero-topline">
+        <p class="name">Prom Sereyreaksa</p>
+        <a class="switch-link" href="https://design.promsereyreaksa.dev/">Open design portfolio</a>
+      </div>
+      <h1>{siteData.hero.headline} software.</h1>
+      <p class="intro">{siteData.about.intro}</p>
+      <p class="summary">{siteData.site.description}</p>
+
+      <div class="hero-grid">
+        <div class="panel">
+          <p class="panel-label">Now</p>
+          <ul>
+            {highlights.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="panel">
+          <p class="panel-label">Focus</p>
+          <p>
+            Product-minded frontend and full-stack work, practical security tooling, and MVPs that
+            are simple to use and properly finished.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow">Selected Work</p>
+        <p class="section-copy">A text-led snapshot of the projects that best show how I think and build.</p>
+      </div>
+      <div class="project-list">
+        {projects.map((project) => (
+          <article class="project-card">
+            <div class="project-meta">
+              <h2>{project.title}</h2>
+              <p>{project.role}</p>
+            </div>
+            <p class="project-summary">{project.summary}</p>
+            <p class="project-outcome">{project.outcome}</p>
+            <div class="project-footer">
+              <span>{project.timeline}</span>
+              {project.link ? (
+                <a href={project.link} target="_blank" rel="noreferrer">
+                  Visit project
+                </a>
+              ) : (
+                <span>Private build</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow">Experience</p>
+        <p class="section-copy">Leadership, product work, teaching, and technical delivery across recent roles.</p>
+      </div>
+      <div class="timeline">
+        {experience.map((item) => (
+          <article class="timeline-item">
+            <div class="timeline-head">
+              <h2>{item.title}</h2>
+              <p>{item.organization}</p>
+            </div>
+            <span>{item.time}</span>
+            <p>{item.details[0]}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section contact">
+      <div class="section-head">
+        <p class="eyebrow">Contact</p>
+        <p class="section-copy">
+          Open to internships, freelance engineering work, startup collaboration, and product conversations.
+        </p>
+      </div>
+      <div class="contact-grid">
+        {contactMethods.map((method) => (
+          <a class="contact-card" href={method.href} target={method.href.startsWith('http') ? '_blank' : undefined} rel={method.href.startsWith('http') ? 'noreferrer' : undefined}>
+            <span>{method.label}</span>
+            <strong>{method.value}</strong>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .engineer-shell {
+      width: min(1040px, calc(100vw - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    .hero,
+    .section {
+      position: relative;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero {
+      border-top: 0;
+      padding-top: 3rem;
+    }
+
+    .eyebrow,
+    .panel-label {
+      margin: 0 0 0.85rem;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+    }
+
+    .hero-topline,
+    .section-head,
+    .project-footer,
+    .timeline-head,
+    .contact-card {
+      display: flex;
+      gap: 1rem;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .name,
+    .section-copy,
+    .project-meta p,
+    .timeline-head p,
+    .project-footer,
+    .timeline-item span,
+    .contact-card span {
+      margin: 0;
+      color: var(--muted);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .switch-link,
+    .project-footer a {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+
+    h1 {
+      max-width: 12ch;
+      margin: 0.35rem 0 1rem;
+      font-size: clamp(3rem, 10vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.05;
+    }
+
+    .intro {
+      max-width: 42rem;
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      line-height: 1.35;
+    }
+
+    .summary,
+    .panel p,
+    .project-summary,
+    .project-outcome,
+    .timeline-item p {
+      max-width: 42rem;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #382822;
+    }
+
+    .hero-grid,
+    .project-list,
+    .timeline,
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hero-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-list,
+    .timeline {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panel,
+    .project-card,
+    .timeline-item,
+    .contact-card {
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .project-card,
+    .timeline-item {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-card {
+      text-decoration: none;
+      align-items: center;
+    }
+
+    .contact-card strong {
+      font-size: 1rem;
+      text-align: right;
+    }
+
+    @media (max-width: 820px) {
+      .engineer-shell {
+        width: min(100vw - 1.25rem, 1040px);
+      }
+
+      .hero-topline,
+      .section-head,
+      .project-footer,
+      .timeline-head,
+      .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-grid,
+      .project-list,
+      .timeline,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</SimpleLayout>

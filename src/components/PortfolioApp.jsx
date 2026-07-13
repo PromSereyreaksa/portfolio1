@@ -9,6 +9,8 @@ const ProjectsSection = lazy(() => import('./ProjectsSection.jsx'));
 
 export default function PortfolioApp({
   initialSection = 'landing',
+  basePath = '/',
+  portfolioLinks = [],
   hero,
   about,
   education,
@@ -63,7 +65,7 @@ export default function PortfolioApp({
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <Navigation />
+      <Navigation basePath={basePath} portfolioLinks={portfolioLinks} />
       <main id="main-content" className="portfolio-atmosphere">
         <div id="landing" className="section-anchor">
           <LandingSection hero={hero} />

@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  return posts.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const post = entry.data;
+---
+
+<SiteLayout
+  title={`${post.title} | Prom Sereyreaksa`}
+  description={post.summary}
+  canonical={`https://promsereyreaksa.dev/writing/${post.slug}`}
+  currentPath="/writing"
+>
+  <section class="page-header shell">
+    <div data-reveal>
+      <p class="eyebrow">{post.category}</p>
+      <h1 class="page-title">{post.title}</h1>
+      <p class="article-lead">{post.summary}</p>
+      <div class="meta-row" style="margin-top:1.2rem;">
+        <span>{post.date}</span>
+        <span>{post.readTime}</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <article class="article-prose" data-reveal style="max-width:48rem;">
+      <Content />
+    </article>
+  </section>
+</SiteLayout>

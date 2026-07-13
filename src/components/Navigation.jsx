@@ -10,7 +10,7 @@ const SECTION_LINKS = [
   { id: 'contact', label: 'CONTACT' },
 ];
 
-const SECTION_URLS = {
+const ROOT_SECTION_URLS = {
   landing: '/',
   about: '/about',
   experience: '/about#experience',
@@ -19,13 +19,33 @@ const SECTION_URLS = {
   contact: '/contact',
 };
 
-export default function Navigation() {
+const normalizeBasePath = (basePath) => {
+  if (!basePath || basePath === '/') return '/';
+  return basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+};
+
+const buildSectionUrls = (basePath) => {
+  const normalizedBasePath = normalizeBasePath(basePath);
+  if (normalizedBasePath === '/') return ROOT_SECTION_URLS;
+
+  return {
+    landing: `${normalizedBasePath}/`,
+    about: `${normalizedBasePath}/#about`,
+    experience: `${normalizedBasePath}/#experience`,
+    projects: `${normalizedBasePath}/#projects`,
+    'visual-work': `${normalizedBasePath}/#visual-work`,
+    contact: `${normalizedBasePath}/#contact`,
+  };
+};
+
+export default function Navigation({ basePath = '/', portfolioLinks = [] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState('landing');
   const [pillStyle, setPillStyle] = useState({ opacity: 0, width: 0, x: 0 });
   const itemRefs = useRef({});
   const navLinks = useMemo(() => SECTION_LINKS, []);
+  const sectionUrls = useMemo(() => buildSectionUrls(basePath), [basePath]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +63,11 @@ export default function Navigation() {
 
     if (currentHash) {
       setActiveItem(currentHash);
+      return;
+    }
+
+    if (basePath !== '/') {
+      setActiveItem('landing');
       return;
     }
 
@@ -67,7 +92,7 @@ export default function Navigation() {
     }
 
     setActiveItem('landing');
-  }, []);
+  }, [basePath]);
 
   useEffect(() => {
     const updateActiveSection = () => {
@@ -137,7 +162,7 @@ export default function Navigation() {
     if (!element) return;
 
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.history.replaceState(null, '', SECTION_URLS[sectionId] || `/#${sectionId}`);
+    window.history.replaceState(null, '', sectionUrls[sectionId] || `/#${sectionId}`);
     setActiveItem(sectionId);
     setIsOpen(false);
   };
@@ -172,7 +197,16 @@ export default function Navigation() {
             SEREY REAKSA
           </button>
 
-          <div className="hidden lg:flex items-center ml-auto">
+          <div className="hidden lg:flex items-center ml-auto gap-3">
+            {portfolioLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center rounded-full border border-zinc-300 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-700 transition-colors hover:border-zinc-950 hover:text-zinc-950"
+              >
+                {link.label}
+              </a>
+            ))}
             <div className="relative flex items-center gap-0.5 lg:gap-1 rounded-full p-1">
               <span
                 aria-hidden="true"
@@ -227,6 +261,15 @@ export default function Navigation() {
                 : 'bg-white/90 border-white/70 backdrop-blur-xl shadow-[0_18px_40px_-32px_rgba(0,0,0,0.2)]'
             }`}
           >
+            {portfolioLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="mb-2 block rounded-xl border border-zinc-200 px-4 py-3 text-xs tracking-[0.2em] text-zinc-700 transition-colors hover:border-zinc-950 hover:text-zinc-950"
+              >
+                {link.label}
+              </a>
+            ))}
             {navLinks.map((link) => {
               const isActive = activeItem === link.id;
               return (

@@ -1,0 +1,87 @@
+---
+import { loadPortfolioContent } from '../lib/portfolioContent.js';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const { experience, education } = await loadPortfolioContent();
+---
+
+<SiteLayout
+  title="Experience | Prom Sereyreaksa"
+  description="Professional experience and education for Prom Sereyreaksa across product work, teaching, and design support."
+  canonical="https://promsereyreaksa.dev/experience"
+  currentPath="/experience"
+>
+  <section class="page-header shell">
+    <div data-reveal>
+      <p class="eyebrow">Experience</p>
+      <h1 class="page-title">Work shaped by products, teams, and teaching.</h1>
+      <p class="page-lead">
+        A timeline of product delivery, technical teaching, and design support work.
+      </p>
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="timeline">
+      {experience.map((item) => (
+        <article class="timeline-item" data-reveal>
+          <div class="meta-row">
+            <span>{item.time}</span>
+          </div>
+          <h2 style="margin-top:0.7rem;font-size:1.35rem;">{item.title}</h2>
+          <p style="margin:0.25rem 0 0;color:var(--muted);">{item.organization}</p>
+          <div class="detail-stack">
+            {item.details.map((detail) => (
+              <p>{detail}</p>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Education</p>
+      <h2 class="section-title">Formal study alongside the work.</h2>
+    </div>
+    <div class="education-list">
+      {education.map((item) => (
+        <article class="education-row" data-reveal>
+          <div class="meta-row">
+            <span>{item.years}</span>
+          </div>
+          <h3 style="margin-top:0.75rem;font-size:1.32rem;">{item.degree}</h3>
+          <p class="section-copy" style="margin-top:0.5rem;">{item.school}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .detail-stack {
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 0.9rem;
+      color: var(--muted);
+    }
+
+    .detail-stack p {
+      margin: 0;
+    }
+
+    .education-list {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .education-row {
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</SiteLayout>

@@ -1,31 +1,94 @@
 ---
-import PortfolioApp from '../components/PortfolioApp.jsx';
 import { loadPortfolioContent } from '../lib/portfolioContent.js';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import TechTags from '../components/TechTags.jsx';
 
-const { siteData, experience, education, projects, artwork, contactMethods } =
-  await loadPortfolioContent();
+const { projects } = await loadPortfolioContent();
 ---
 
-<BaseLayout
-  title="Projects - Prom Sereyreaksa | Software Engineer Portfolio"
-  description="Explore React projects, web applications, and software engineering work by Prom Sereyreaksa. View innovative projects including AUREA, Phsar Design, StockMate, and Automata Visualizer."
+<SiteLayout
+  title="Projects | Prom Sereyreaksa"
+  description="Selected work by Prom Sereyreaksa across software engineering, security tooling, education, and product development."
   canonical="https://promsereyreaksa.dev/projects"
-  keywords="Prom Sereyreaksa Projects, React Projects, Software Engineer Portfolio, Web Development Cambodia, AUREA, Phsar Design, StockMate, Automata"
-  ogDescription="Explore React projects, web applications, and software engineering work by Prom Sereyreaksa including innovative applications and digital solutions."
+  currentPath="/projects"
 >
-  <PortfolioApp
-    client:load
-    initialSection="projects"
-    hero={siteData.hero}
-    about={siteData.about}
-    education={education}
-    experience={experience}
-    projectsSection={siteData['projects-section']}
-    projects={projects}
-    artworkSection={siteData['artwork-section']}
-    artwork={artwork}
-    contact={siteData.contact}
-    contactMethods={contactMethods}
-  />
-</BaseLayout>
+  <section class="page-header shell">
+    <div data-reveal>
+      <p class="eyebrow">Projects</p>
+      <h1 class="page-title">Case studies, products, and focused experiments.</h1>
+      <p class="page-lead">
+        A selection of work across product engineering, security-minded tooling, educational
+        software, and content-led web experiences.
+      </p>
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="project-list">
+      {projects.map((project) => (
+        <a class="project-line" href={`/projects/${project.slug}`} data-reveal>
+          <div>
+            <div class="meta-row">
+              <span>{project.year}</span>
+              <span>{project.role}</span>
+            </div>
+            <h2>{project.title}</h2>
+          </div>
+          <div class="project-body">
+            <p>{project.summary}</p>
+            <TechTags stack={project.stack} max={8} />
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .project-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .project-line {
+      display: grid;
+      grid-template-columns: minmax(12rem, 0.42fr) minmax(0, 0.58fr);
+      gap: 1rem 2rem;
+      min-width: 0;
+      padding: 1.35rem 0;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .project-body {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .project-line h2 {
+      font-size: 1.55rem;
+      font-weight: 550;
+      line-height: 1.1;
+    }
+
+    .project-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 760px) {
+      .project-line {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .project-line h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</SiteLayout>

@@ -1,0 +1,57 @@
+---
+import { loadPortfolioContent } from '../../lib/portfolioContent.js';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const { writing } = await loadPortfolioContent();
+---
+
+<SiteLayout
+  title="Writing | Prom Sereyreaksa"
+  description="Writing by Prom Sereyreaksa on product clarity, security, engineering, and software craftsmanship."
+  canonical="https://promsereyreaksa.dev/writing"
+  currentPath="/writing"
+>
+  <section class="page-header shell">
+    <div data-reveal>
+      <p class="eyebrow">Writing</p>
+      <h1 class="page-title">Notes on systems, interfaces, and clarity.</h1>
+      <p class="page-lead">
+        Short essays on product work, security-minded engineering, and what good software tends to
+        have in common.
+      </p>
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="writing-list">
+      {writing.map((post) => (
+        <a class="writing-row" href={`/writing/${post.slug}`} data-reveal>
+          <div class="meta-row">
+            <span>{post.date}</span>
+            <span>{post.category}</span>
+          </div>
+          <h2 style="margin-top:0.75rem;font-size:1.5rem;line-height:1.08;">{post.title}</h2>
+          <p class="section-copy" style="margin-top:0.6rem;">{post.summary}</p>
+          <p style="margin:0.9rem 0 0;color:var(--muted);font-size:0.92rem;">{post.readTime}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .writing-list {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .writing-row {
+      display: grid;
+      gap: 0;
+      padding-top: 1.15rem;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+    }
+  </style>
+</SiteLayout>

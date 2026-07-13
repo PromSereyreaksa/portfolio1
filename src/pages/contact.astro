@@ -1,31 +1,101 @@
 ---
-import PortfolioApp from '../components/PortfolioApp.jsx';
 import { loadPortfolioContent } from '../lib/portfolioContent.js';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ContactIcon from '../components/ContactIcon.jsx';
 
-const { siteData, experience, education, projects, artwork, contactMethods } =
-  await loadPortfolioContent();
+const { contactMethods } = await loadPortfolioContent();
 ---
 
-<BaseLayout
-  title="Contact - Prom Sereyreaksa | Get In Touch"
-  description="Contact Prom Sereyreaksa for software engineering projects, creative technology collaborations, or graphic design work. Get in touch for freelance opportunities in Cambodia."
+<SiteLayout
+  title="Contact | Prom Sereyreaksa"
+  description="Contact Prom Sereyreaksa for internships, freelance work, product collaborations, and engineering conversations."
   canonical="https://promsereyreaksa.dev/contact"
-  keywords="Contact Prom Sereyreaksa, Software Engineer Contact, Creative Technologist Hire, Graphic Designer Cambodia, Freelance Developer, React Developer Contact"
-  ogDescription="Contact Prom Sereyreaksa for software engineering projects, creative technology collaborations, or graphic design work."
+  currentPath="/contact"
 >
-  <PortfolioApp
-    client:load
-    initialSection="contact"
-    hero={siteData.hero}
-    about={siteData.about}
-    education={education}
-    experience={experience}
-    projectsSection={siteData['projects-section']}
-    projects={projects}
-    artworkSection={siteData['artwork-section']}
-    artwork={artwork}
-    contact={siteData.contact}
-    contactMethods={contactMethods}
-  />
-</BaseLayout>
+  <section class="page-header shell split">
+    <div data-reveal>
+      <p class="eyebrow">Contact</p>
+      <h1 class="page-title">Let’s build something useful together.</h1>
+      <p class="page-lead">
+        I am open to internships, freelance projects, collaborations, and product conversations.
+        If the work needs care, structure, and strong execution, I’m interested.
+      </p>
+    </div>
+    <div class="contact-note" data-reveal>
+      <p>Usually available for replies within a day.</p>
+      <p>Best first contact: email.</p>
+    </div>
+  </section>
+
+  <div class="shell divider"></div>
+
+  <section class="section shell">
+    <div class="contact-grid">
+      {contactMethods.map((method) => (
+        <a class="contact-line" href={method.href} data-reveal>
+          <strong class="contact-label">
+            <span class="contact-glyph"><ContactIcon name={method.icon} /></span>
+            {method.label}
+          </strong>
+          <span>{method.value}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .contact-note {
+      color: var(--muted);
+      display: grid;
+      gap: 0.2rem;
+      align-self: end;
+    }
+
+    .contact-note p {
+      margin: 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-line {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+    }
+
+    .contact-line span {
+      color: var(--muted);
+    }
+
+    .contact-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-glyph {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+    }
+
+    .contact-glyph :global(svg) {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (max-width: 760px) {
+      .contact-line {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+    }
+  </style>
+</SiteLayout>

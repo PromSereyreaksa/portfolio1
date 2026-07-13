@@ -1,0 +1,222 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e6]: promsereyreaksa
+      - navigation "Primary links" [ref=e8]:
+        - link "GitHub" [ref=e9] [cursor=pointer]:
+          - /url: https://github.com/PromSereyreaksa
+        - link "LinkedIn" [ref=e10] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/prom-sereyreaksa-2a2298364/
+        - link "Email" [ref=e11] [cursor=pointer]:
+          - /url: mailto:prumsereyreaksa@gmail.com
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - paragraph [ref=e14]: Software Developer @ Anagata
+        - img "Anagata logo" [ref=e15]
+      - heading "Prom Sereyreaksa." [level=1] [ref=e16]
+      - paragraph [ref=e17]: Software developer building practical products with clean execution and a strong sense of what matters.
+      - paragraph [ref=e18]: 3+ years shipping products, leading teams, and working across engineering, product, and design.
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - img [ref=e21]
+          - text: CS @ CADT
+        - generic [ref=e25]:
+          - img [ref=e26]
+          - text: B.Ed TEFL @ IFL
+        - generic [ref=e30]:
+          - img [ref=e31]
+          - text: Phnom Penh
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - paragraph [ref=e36]: Selected Projects
+        - paragraph [ref=e37]: "Projects where I owned outcomes end-to-end: product direction, implementation quality, and real-world impact."
+      - generic [ref=e38]:
+        - article [ref=e39]:
+          - generic [ref=e40]:
+            - heading "LeakScope" [level=2] [ref=e41]
+            - paragraph [ref=e42]: Founder and Full-stack Engineer
+            - generic [ref=e43]: MARCH 2026 - PRESENT
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: Automated external security scanner for modern web applications.
+            - generic [ref=e46]:
+              - generic "Security Testing" [ref=e47]
+              - generic "Access Control" [ref=e48]
+              - generic "JWT" [ref=e49]:
+                - img [ref=e50]
+                - text: JWT
+              - generic "Automation" [ref=e52]
+              - generic "Threat Modeling" [ref=e53]
+            - link "Open project ↗" [ref=e54] [cursor=pointer]:
+              - /url: https://leakscope.tech
+        - article [ref=e55]:
+          - generic [ref=e56]:
+            - heading "AUREA" [level=2] [ref=e57]
+            - paragraph [ref=e58]: Co-founder, Frontend and Product
+            - generic [ref=e59]: SEPTEMBER 2025 - PRESENT
+          - generic [ref=e60]:
+            - paragraph [ref=e61]: Website builder helping designers ship portfolios quickly.
+            - generic [ref=e62]:
+              - generic "React" [ref=e63]:
+                - img [ref=e64]
+                - text: React
+              - generic "Vite" [ref=e66]:
+                - img [ref=e67]
+                - text: Vite
+              - generic "Tailwind CSS" [ref=e69]:
+                - img [ref=e70]
+                - text: Tailwind CSS
+              - generic "Express JS" [ref=e72]:
+                - img [ref=e73]
+                - text: Express JS
+            - link "Open project ↗" [ref=e75] [cursor=pointer]:
+              - /url: https://www.aurea.tools/
+        - article [ref=e76]:
+          - generic [ref=e77]:
+            - heading "Phsar Design" [level=2] [ref=e78]
+            - paragraph [ref=e79]: Frontend Engineer
+            - generic [ref=e80]: JULY 2025 - PRESENT
+          - generic [ref=e81]:
+            - paragraph [ref=e82]: Creative freelancing platform connecting local digital artists with clients.
+            - generic [ref=e83]:
+              - generic "React" [ref=e84]:
+                - img [ref=e85]
+                - text: React
+              - generic "Redux Toolkit" [ref=e87]:
+                - img [ref=e88]
+                - text: Redux Toolkit
+              - generic "Vite" [ref=e90]:
+                - img [ref=e91]
+                - text: Vite
+              - generic "Router" [ref=e93]
+            - link "Open project ↗" [ref=e94] [cursor=pointer]:
+              - /url: https://phsardesign.vercel.app/
+        - article [ref=e95]:
+          - generic [ref=e96]:
+            - heading "StockMate" [level=2] [ref=e97]
+            - paragraph [ref=e98]: Mobile Developer
+            - generic [ref=e99]: JANUARY 2026
+          - generic [ref=e100]:
+            - paragraph [ref=e101]: Offline-first stock management mobile app with practical analytics.
+            - generic [ref=e102]:
+              - generic "Flutter" [ref=e103]:
+                - img [ref=e104]
+                - text: Flutter
+              - generic "Clean Architecture" [ref=e106]
+              - generic "SQLite" [ref=e107]:
+                - img [ref=e108]
+                - text: SQLite
+    - generic [ref=e110]:
+      - generic [ref=e111]:
+        - paragraph [ref=e112]: Experience
+        - paragraph [ref=e113]: Leadership, teaching, product building, and technical delivery.
+      - generic [ref=e114]:
+        - article [ref=e115]:
+          - generic [ref=e116]:
+            - heading "Team Lead" [level=2] [ref=e117]
+            - paragraph [ref=e118]: ACTSmart Incubation Program - Cohort 1
+            - generic [ref=e119]: JULY 12 - DECEMBER 27, 2025
+          - paragraph [ref=e121]: Selected for ACTSmart, a tech-focused incubation program supporting startups, SMEs, and university entrepreneurs.
+        - article [ref=e122]:
+          - generic [ref=e123]:
+            - heading "Team Lead" [level=2] [ref=e124]
+            - paragraph [ref=e125]: Turing Hackathon Cohort 8
+            - generic [ref=e126]: JUNE 06 - JUNE 15, 2025
+          - paragraph [ref=e128]: Co-founded Phsar Design, a platform helping local designers showcase and sell creative work.
+        - article [ref=e129]:
+          - generic [ref=e130]:
+            - heading "Trainer" [level=2] [ref=e131]
+            - paragraph [ref=e132]: CADT's Next GEN Engagement Program
+            - generic [ref=e133]: JULY 23 - SEPTEMBER 16, 2025
+          - paragraph [ref=e135]: Taught JavaScript to first-year students and guided project implementation.
+        - article [ref=e136]:
+          - generic [ref=e137]:
+            - heading "Design Volunteer" [level=2] [ref=e138]
+            - paragraph [ref=e139]: Shadow Design Event - Season 1 and 2
+            - generic [ref=e140]: NOVEMBER 2024, MAY - JUNE 2025
+          - paragraph [ref=e142]: Designed promotional posters and social media visuals for event communication.
+    - generic [ref=e143]:
+      - paragraph [ref=e145]: Education
+      - generic [ref=e146]:
+        - article [ref=e147]:
+          - generic [ref=e148]:
+            - heading "Bachelor of Computer Science in Software Engineering" [level=2] [ref=e149]
+            - paragraph [ref=e150]: Cambodia Academy of Digital Technology (CADT)
+            - generic [ref=e151]: 2024 - 2027
+        - article [ref=e152]:
+          - generic [ref=e153]:
+            - heading "Bachelor of Education (B.Ed) in TEFL" [level=2] [ref=e154]
+            - paragraph [ref=e155]: Institution of Foreign Languages (IFL)
+            - generic [ref=e156]: 2024 - 2027
+    - generic [ref=e157]:
+      - paragraph [ref=e158]: Stack
+      - generic [ref=e159]:
+        - generic "Astro" [ref=e160]:
+          - img "Astro" [ref=e161]
+        - generic "React" [ref=e163]:
+          - img "React" [ref=e164]
+        - generic "JavaScript" [ref=e166]:
+          - img "JavaScript" [ref=e167]
+        - generic "Node.js" [ref=e169]:
+          - img "Node.js" [ref=e170]
+        - generic "Express" [ref=e172]:
+          - img "Express" [ref=e173]
+        - generic "MongoDB" [ref=e175]:
+          - img "MongoDB" [ref=e176]
+        - generic "Tailwind CSS" [ref=e178]:
+          - img "Tailwind CSS" [ref=e179]
+        - generic "Figma" [ref=e181]:
+          - img "Figma" [ref=e182]
+        - generic "Git" [ref=e184]:
+          - img "Git" [ref=e185]
+        - generic "Python" [ref=e187]:
+          - img "Python" [ref=e188]
+        - generic "Flutter" [ref=e190]:
+          - img "Flutter" [ref=e191]
+        - generic "Java" [ref=e193]:
+          - img "Java" [ref=e194]
+        - generic "Next.js" [ref=e196]:
+          - img "Next.js" [ref=e197]
+        - generic "Three.js" [ref=e199]:
+          - img "Three.js" [ref=e200]
+    - generic [ref=e202]:
+      - generic [ref=e203]:
+        - paragraph [ref=e204]: Contact
+        - paragraph [ref=e205]: Open to internships, freelance projects, collaborations, and product conversations.
+      - generic [ref=e206]:
+        - link "Email prumsereyreaksa@gmail.com" [ref=e207] [cursor=pointer]:
+          - /url: mailto:prumsereyreaksa@gmail.com
+          - generic [ref=e208]:
+            - img [ref=e209]
+            - text: Email
+          - strong [ref=e212]: prumsereyreaksa@gmail.com
+        - link "Telegram @souuJ" [ref=e213] [cursor=pointer]:
+          - /url: https://t.me/souuJ
+          - generic [ref=e214]:
+            - img [ref=e215]
+            - text: Telegram
+          - strong [ref=e218]: "@souuJ"
+        - link "LinkedIn Professional profile" [ref=e219] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/prom-sereyreaksa-2a2298364/
+          - generic [ref=e220]:
+            - img [ref=e221]
+            - text: LinkedIn
+          - strong [ref=e223]: Professional profile
+        - link "GitHub Code and experiments" [ref=e224] [cursor=pointer]:
+          - /url: https://github.com/PromSereyreaksa
+          - generic [ref=e225]:
+            - img [ref=e226]
+            - text: GitHub
+          - strong [ref=e228]: Code and experiments
+  - generic [ref=e231]:
+    - button "Menu" [ref=e232]:
+      - img [ref=e234]
+      - generic: Menu
+    - button "Inspect" [ref=e238]:
+      - img [ref=e240]
+      - generic: Inspect
+    - button "Audit" [ref=e242]:
+      - img [ref=e244]
+      - generic: Audit
+    - button "Settings" [ref=e247]:
+      - img [ref=e249]
+      - generic: Settings

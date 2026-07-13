@@ -1,0 +1,34 @@
+---
+import PortfolioApp from '../components/PortfolioApp.jsx';
+import { loadPortfolioContent } from '../lib/portfolioContent.js';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const { siteData, experience, education, projects, artwork, contactMethods } =
+  await loadPortfolioContent();
+---
+
+<BaseLayout
+  title="Design Portfolio | Prom Sereyreaksa"
+  description="Design portfolio for Prom Sereyreaksa featuring visual work, design-led projects, and creative direction."
+  canonical="https://design.promsereyreaksa.dev/"
+  keywords="Prom Sereyreaksa Design Portfolio, Graphic Designer Cambodia, Visual Work, Digital Art, UI Design"
+  ogTitle="Design Portfolio | Prom Sereyreaksa"
+  ogDescription="Visual work, design projects, and creative direction by Prom Sereyreaksa."
+>
+  <PortfolioApp
+    client:load
+    initialSection="visual-work"
+    basePath="/design"
+    portfolioLinks={[{ label: 'Engineer Portfolio', href: 'https://engineer.promsereyreaksa.dev/' }]}
+    hero={siteData.hero}
+    about={siteData.about}
+    education={education}
+    experience={experience}
+    projectsSection={siteData['projects-section']}
+    projects={projects}
+    artworkSection={siteData['artwork-section']}
+    artwork={artwork}
+    contact={siteData.contact}
+    contactMethods={contactMethods}
+  />
+</BaseLayout>

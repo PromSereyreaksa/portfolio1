@@ -1,10 +1,11 @@
 {
   "eyebrow": "ABOUT ME",
   "intro": "Building software that feels clear, useful, and properly finished.",
-  "stats": ["3+ years building", "6 products shipped", "Based in Phnom Penh"],
+  "stats": ["3+ years building", "6 shipped products", "Based in Phnom Penh"],
   "paragraphs": [
-    "I'm a software developer and Computer Science student focused on building practical digital products with clear UX and strong execution. I work across product thinking, frontend development, and technical problem-solving to turn ideas into real, usable systems.",
-    "Over the last 3+ years, I've shipped multiple products, led teams, taught students, and worked on projects across software, design, and security. I'm especially interested in tools that solve real problems and feel simple, useful, and well-crafted."
+    "I build products where engineering quality and interface clarity matter at the same time.",
+    "My work usually sits between software engineering, product thinking, and design systems. I care about reducing noise, tightening the flow, and making software easier to trust.",
+    "Outside product work, I spend time on security-minded projects, teaching, and experiments that sharpen how I think about systems."
   ],
   "experienceIntro": {
     "eyebrow": "PROFESSIONAL JOURNEY",
@@ -19,16 +20,21 @@
     "Astro",
     "React",
     "JavaScript",
+    "TypeScript",
     "Node.js",
     "Express",
     "MongoDB",
     "Tailwind CSS",
+    "Vite",
+    "Redux Toolkit",
     "Figma",
     "Git",
     "Python",
     "Flutter",
     "Java",
     "Next.js",
-    "Three.js"
+    "Three.js",
+    "SQLite",
+    "JWT"
   ]
 }

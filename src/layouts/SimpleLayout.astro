@@ -1,0 +1,82 @@
+---
+const {
+  title = 'Prom Sereyreaksa',
+  description = 'Portfolio of Prom Sereyreaksa',
+  canonical = 'https://promsereyreaksa.dev/',
+  ogTitle = title,
+  ogDescription = description,
+  ogImage = 'https://promsereyreaksa.dev/preview.png',
+  robots = 'index, follow',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style is:global>
+      :root {
+        color-scheme: light;
+        --bg: #f5f7fb;
+        --panel: #ffffff;
+        --text: #111111;
+        --muted: #5e6470;
+        --line: rgba(17, 17, 17, 0.12);
+        --line-strong: rgba(17, 17, 17, 0.22);
+        --accent: #032ea1;
+        --accent-soft: rgba(3, 46, 161, 0.08);
+        --shadow: 0 24px 60px rgba(17, 17, 17, 0.04);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(3, 46, 161, 0.05), transparent 24%),
+          linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+        text-decoration-color: rgba(3, 46, 161, 0.3);
+        text-underline-offset: 0.18em;
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

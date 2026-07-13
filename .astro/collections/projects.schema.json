@@ -5,6 +5,9 @@
     "order": {
       "type": "number"
     },
+    "slug": {
+      "type": "string"
+    },
     "title": {
       "type": "string"
     },
@@ -15,6 +18,9 @@
       "type": "string"
     },
     "timeline": {
+      "type": "string"
+    },
+    "year": {
       "type": "string"
     },
     "outcome": {
@@ -34,6 +40,9 @@
       "items": {
         "type": "string"
       }
+    },
+    "github": {
+      "type": "string"
     },
     "secondaryLink": {
       "type": "string"
@@ -56,10 +65,12 @@
   },
   "required": [
     "order",
+    "slug",
     "title",
     "summary",
     "role",
     "timeline",
+    "year",
     "outcome",
     "image",
     "stack",
